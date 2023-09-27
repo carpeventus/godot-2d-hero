@@ -21,11 +21,12 @@ public partial class PlayerController : CharacterBody2D {
 
 	public float CurrentGravity { get; set; }
 
-	public float MoveSpeed { get; private set; } = 60f;
+	[Export] public float MoveSpeed { get; private set; } = 60f;
 
-	public float JumpVelocity { get; private set; } = -400f;
-	public float MoveAcceleration { get; private set; } =  100f/ 0.1f;
-	public float InAirAcceleration { get; private set; } = 100f / 0.01f;
+	[Export] public float JumpVelocity { get; private set; } = -400f;
+	[Export] public float MoveAcceleration { get; private set; } =  100f/ 0.1f;
+	[Export] public float InAirAcceleration { get; private set; } = 100f / 0.01f;
+	[Export] public float FallMulti { get; private set; } = 4f;
 	
 	private Sprite2D _sprite;
 	

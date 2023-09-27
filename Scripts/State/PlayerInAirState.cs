@@ -3,8 +3,7 @@ using Godot;
 public class PlayerInAirState : PlayerState {
     public PlayerInAirState(StateMachine<PlayerState> stateMachine, PlayerController player, string animationName) : base(stateMachine, player, animationName) {
     }
-
-    public float fallMulti = 4f;
+    
     
     public override void PhysicsUpdate(double delta) {
         base.PhysicsUpdate(delta);
@@ -25,11 +24,11 @@ public class PlayerInAirState : PlayerState {
         player.CurrentGravity = player.DefaultGravity;
         // 下落
         if (player.Velocity.Y > 0) {
-            player.CurrentGravity = player.DefaultGravity * (3* fallMulti / 4);
+            player.CurrentGravity = player.DefaultGravity * (3* player.FallMulti / 4);
         }
         // 上升中
         else if (player.Velocity.Y < 0 && !Input.IsActionPressed("jump")) {
-            player.CurrentGravity = player.DefaultGravity * (fallMulti / 2);
+            player.CurrentGravity = player.DefaultGravity * (player.FallMulti / 2);
         }
         
     }
