@@ -9,11 +9,10 @@ public partial class World : Node2D {
 		_tileMap = GetNode<TileMap>("TileMap");
 		var used = _tileMap.GetUsedRect().Grow(-1);
 		Vector2I tileSize = _tileMap.TileSet.TileSize;
-
 		_camera.LimitTop = used.Position.Y * tileSize.Y;
-		_camera.LimitLeft = used.Position.X * tileSize.Y;
 		_camera.LimitRight = used.End.X * tileSize.X;
-		_camera.LimitBottom = used.End.Y * tileSize.X;
+		_camera.LimitBottom = used.End.Y * tileSize.Y;
+		_camera.LimitLeft = used.Position.X * tileSize.X;
 		_camera.ResetSmoothing();
 	}
 	
