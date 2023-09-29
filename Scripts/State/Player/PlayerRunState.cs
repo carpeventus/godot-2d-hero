@@ -8,7 +8,7 @@ public class PlayerRunState : PlayerOnFloorState {
 
     public override void LogicUpdate(double delta) {
         base.LogicUpdate(delta);
-        if (Mathf.IsZeroApprox(player.Direction)) {
+        if (Mathf.IsZeroApprox(player.InputDirection)) {
             stateMachine.ChangeState(player.PlayerIdleState);
         }
     }

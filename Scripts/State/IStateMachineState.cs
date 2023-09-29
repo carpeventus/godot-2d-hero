@@ -1,5 +1,5 @@
 
-public interface IStateMachineState { 
+public interface IStateMachineState {
     void OnEnter();
     void OnExit();
     void PhysicsUpdate(double delta);

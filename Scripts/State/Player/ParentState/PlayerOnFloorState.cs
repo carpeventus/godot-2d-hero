@@ -14,14 +14,14 @@ public class PlayerOnFloorState : PlayerState {
 
     public override void PhysicsUpdate(double delta) {
         base.PhysicsUpdate(delta);
-        BasicChangeVelocity(delta, player.MoveAcceleration);
+        BasicChangeVelocity(delta, player.CurrentGravity, player.MoveAcceleration);
         player.MoveAndSlide();
     }
 
     public override void LogicUpdate(double delta) {
         base.LogicUpdate(delta);
-        if (!Mathf.IsZeroApprox(player.Direction)) {
-            player.FlipSprite(player.Direction < 0);
+        if (!Mathf.IsZeroApprox(player.Velocity.X)) {
+            player.FlipSprite(player.Velocity.X < 0);
         }
         
         if (shouldJump) {
