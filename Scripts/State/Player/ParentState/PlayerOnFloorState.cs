@@ -27,9 +27,14 @@ public class PlayerOnFloorState : PlayerState {
         if (shouldJump) {
             stateMachine.ChangeState(player.PlayerJumpState);
         }
-
+        
         if (!player.IsOnFloor()) {
             stateMachine.ChangeState(player.PlayerInAirState);
         }
+        
+        if (Input.IsActionJustPressed("attack")) {
+            stateMachine.ChangeState(player.PlayerAttack1State);
+        }
+
     }
 }

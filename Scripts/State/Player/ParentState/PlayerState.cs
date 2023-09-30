@@ -6,7 +6,6 @@ public class PlayerState : IStateMachineState {
     protected StateMachine<PlayerState> stateMachine;
     protected string animationName;
     protected bool shouldJump;
-    protected double stateTime;
 
     
     public PlayerState(StateMachine<PlayerState> stateMachine, PlayerController player, string animationName) {
@@ -17,7 +16,6 @@ public class PlayerState : IStateMachineState {
 
     public virtual void OnEnter() {
         player.AnimationPlayer.Play(animationName);
-        stateTime = 0f;
     }
 
     public virtual void OnExit() {
@@ -34,7 +32,6 @@ public class PlayerState : IStateMachineState {
     }
 
     public virtual void LogicUpdate(double delta) {
-        stateTime += delta;
         player.InputDirection = Input.GetAxis("move_left", "move_right");
         shouldJump = (player.IsOnFloor() || player.CoyoteTimer.TimeLeft > 0) && player.JumpDelayInputTimer.TimeLeft > 0;
     }

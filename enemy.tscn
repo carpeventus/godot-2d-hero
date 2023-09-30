@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd6df6euul6cr"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_4twn4"]
+[ext_resource type="Script" path="res://Scripts/HitBox.cs" id="2_pes3l"]
+[ext_resource type="Script" path="res://Scripts/HurtBox.cs" id="3_f2h8a"]
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_4twn4")
+
+[node name="SpriteWrap" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteWrap"]
+
+[node name="HitBox" type="Area2D" parent="SpriteWrap"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("2_pes3l")
+
+[node name="HurtBox" type="Area2D" parent="SpriteWrap"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("3_f2h8a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
