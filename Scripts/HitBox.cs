@@ -15,7 +15,6 @@ public partial class HitBox : Area2D
     
     public void OnAreaEntered(Area2D area) {
         HurtBox hurtBox = area as HurtBox;
-        GD.Print(Owner.Name + "->" + hurtBox.Owner.Name);
         EmitSignal(SignalName.Hit, hurtBox);
         hurtBox?.EmitSignal(HurtBox.SignalName.Hurt, this);
     }

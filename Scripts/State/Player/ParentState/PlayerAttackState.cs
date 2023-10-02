@@ -9,7 +9,11 @@ public class PlayerAttackState : PlayerState {
     public override void OnEnter() {
         base.OnEnter();
         player.IsAttackComboRequested = false;
-  
+    }
+
+    public override void OnExit() {
+        base.OnExit();
+        player.IsAttackComboRequested = false;
     }
 
     public override void PhysicsUpdate(double delta) {
