@@ -16,6 +16,7 @@ public partial class Boar : Enemy {
     public RayCast2D FloorCheck { get; private set; }
     public Timer DelayStopRunTimer { get; private set; }
     public HurtBox HurtBox { get; private set; }
+    public Stat Stat { get; private set; }
     
     private void InitStateMachine() {
         StateMachine = new StateMachine<BoarState>();
@@ -34,6 +35,8 @@ public partial class Boar : Enemy {
         FloorCheck = GetNode<RayCast2D>("SpriteWrap/FloorRayCastChecker");
         DelayStopRunTimer = GetNode<Timer>("DelayStopRunTimer");
         HurtBox = GetNode<HurtBox>("SpriteWrap/HurtBox");
+        Stat = GetNode<Stat>("Stat");
+
         HurtBox.Hurt += OnHurt;
         InitStateMachine();
     }
@@ -58,8 +61,12 @@ public partial class Boar : Enemy {
         FloorCheck.ForceRaycastUpdate();
     }
 
-    public void OnHurt(HitBox hitBox) {
-        GD.Print("攻击者" + hitBox.Owner.Name + "野猪受到伤害HP-10");
-
+    public void OnHurt(HitBox hitBox)
+    {
+        Stat.CurrentHealth -= 1;
+        if (Stat.CurrentHealth <= 0)
+        {
+            QueueFree();
+        }
     }
 }
