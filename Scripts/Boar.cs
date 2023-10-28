@@ -61,8 +61,11 @@ public partial class Boar : Enemy {
         FloorCheck.ForceRaycastUpdate();
     }
 
-    public void OnHurt(HitBox hitBox)
-    {
+    public void OnHurt(HitBox hitBox) {
+        Damage damage = new Damage();
+        damage.amount = 1;
+        damage.source = hitBox.Owner as Node2D;
+        
         Stat.CurrentHealth -= 1;
         if (Stat.CurrentHealth <= 0)
         {
