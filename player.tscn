@@ -1073,7 +1073,7 @@ shape = SubResource("RectangleShape2D_1gegv")
 disabled = true
 
 [node name="Stat" parent="." instance=ExtResource("6_pfo8d")]
-MaxHealth = 10
+MaxHealth = 3
 
 [node name="ImmuneTimer" type="Timer" parent="."]
 one_shot = true

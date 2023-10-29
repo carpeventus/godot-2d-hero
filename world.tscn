@@ -508,7 +508,6 @@ editor_draw_drag_margin = true
 
 [node name="Boar" parent="." instance=ExtResource("4_jx7mu")]
 position = Vector2(239, 155)
-KnockBackForce = 200.0
 
 [node name="Decorations" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
