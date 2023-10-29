@@ -1,7 +1,5 @@
 using Godot;
 
-namespace Hero.Scripts.State.Player.ParentState; 
-
 public class PlayerAttackState : PlayerState {
     public PlayerAttackState(StateMachine<PlayerState> stateMachine, PlayerController player, string animationName) : base(stateMachine, player, animationName) {
     }

@@ -5,10 +5,14 @@ public partial class Boar : Enemy {
     [Export] public float Acceleration = 100f / 0.2f;
     [Export] public float MoveSpeed = 50f;
     [Export] public float MaxSpeed = 80f;
+    [Export] public float KnockBackForce = 200f;
 
+    public Damage CurrentTakenDamage { get; private set; }
     public BoarIdleState BoarIdleState { get; private set; }
     public BoarRunState BoarRunState { get; private set; }
     public BoarWalkState BoarWalkState { get; private set; }
+    public BoarHurtState BoarHurtState { get; private set; }
+    public BoarDieState BoarDieState { get; private set; }
     public StateMachine<BoarState> StateMachine { get; private set; }
     
     public RayCast2D PlayerCheck { get; private set; }
@@ -23,6 +27,8 @@ public partial class Boar : Enemy {
         BoarIdleState = new BoarIdleState(StateMachine, this, "boar_idle");
         BoarWalkState = new BoarWalkState(StateMachine, this, "boar_walk");
         BoarRunState = new BoarRunState(StateMachine, this, "boar_run");
+        BoarDieState = new BoarDieState(StateMachine, this, "boar_die");
+        BoarHurtState = new BoarHurtState(StateMachine, this, "boar_hurt");
         StateMachine.InitState(BoarIdleState);
     }
 
@@ -65,11 +71,17 @@ public partial class Boar : Enemy {
         Damage damage = new Damage();
         damage.amount = 1;
         damage.source = hitBox.Owner as Node2D;
-        
-        Stat.CurrentHealth -= 1;
-        if (Stat.CurrentHealth <= 0)
-        {
-            QueueFree();
-        }
+        CurrentTakenDamage = damage;
+    }
+
+    public void TakeDamage()
+    {
+        Stat.CurrentHealth = Mathf.Max(Stat.CurrentHealth - CurrentTakenDamage.amount, 0);
+        CurrentTakenDamage = null;
+    }
+    
+    public bool IsDead()
+    {
+        return Stat.CurrentHealth <= 0;
     }
 }

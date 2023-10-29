@@ -1,6 +1,3 @@
-using Hero.Scripts.State.Player.ParentState;
-
-namespace Hero.Scripts.State.Player; 
 
 public class PlayerAttack2State : PlayerAttackState {
     public PlayerAttack2State(StateMachine<PlayerState> stateMachine, PlayerController player, string animationName) : base(stateMachine, player, animationName) {

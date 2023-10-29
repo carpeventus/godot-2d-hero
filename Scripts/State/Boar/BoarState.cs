@@ -30,5 +30,14 @@ public class BoarState : IStateMachineState {
     }
 
     public virtual void LogicUpdate(double delta) {
+        if (boar.IsDead())
+        {
+            stateMachine.ChangeState(boar.BoarDieState);
+        }
+
+        if (boar.CurrentTakenDamage is not null)
+        {
+            stateMachine.ChangeState(boar.BoarHurtState);
+        }
     }
 }

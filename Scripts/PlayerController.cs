@@ -1,10 +1,9 @@
 using Godot;
-using Hero.Scripts.State.Player;
+using Godot.Collections;
 
 public partial class PlayerController : CharacterBody2D {
 	public float DefaultGravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity").AsDouble();
-
-
+	
 	#region StateMachine
 	public StateMachine<PlayerState> StateMachine { get; private set; }
 	public PlayerIdleState PlayerIdleState { get; private set; }
@@ -17,11 +16,14 @@ public partial class PlayerController : CharacterBody2D {
 	public PlayerAttack1State PlayerAttack1State { get; private set; }
 	public PlayerAttack2State PlayerAttack2State { get; private set; }
 	public PlayerAttack3State PlayerAttack3State { get; private set; }
+	public PlayerHurtState PlayerHurtState { get; private set; }
+	public PlayerDieState PlayerDieState { get; private set; }
 	#endregion
 
 	public AnimationPlayer AnimationPlayer { get; private set; }
 	public Timer CoyoteTimer { get; private set; }
 	public Timer JumpDelayInputTimer { get; private set; }
+	public Timer ImmuneTimer { get; private set; }
 	public RayCast2D HeadCheck { get; private set; }
 	public RayCast2D FootCheck { get; private set; }
 	public HurtBox HurtBox { get; private set; }
@@ -30,9 +32,10 @@ public partial class PlayerController : CharacterBody2D {
 	public float CurrentGravity { get; set; }
 	public bool IsAttackComboRequested { get; set; }
 
-	[Export] public float MoveSpeed { get; private set; } = 60f;
+	[Export] public float MoveSpeed { get; private set; } = 100f;
 
-	[Export] public float JumpVelocity { get; private set; } = -320f;
+	[Export] public float JumpVelocity { get; private set; } = -330f;
+	[Export] public float KnockBackForce { get; private set; } = 100f;
 	[Export] public Vector2 WallJumpVelocity { get; private set; } = new Vector2(300, -300f);
 	[Export] public float MoveAcceleration { get; private set; } =  100f/ 0.2f;
 	[Export] public float InAirAcceleration { get; private set; } = 100f / 0.1f;
@@ -41,6 +44,9 @@ public partial class PlayerController : CharacterBody2D {
 	[Export] public bool CanCombo { get; private set; } = false;
 	
 	private Node2D _spriteWrap;
+	public Stat Stat { get; private set; }
+
+	public Damage CurrentTakenDamage { get; private set; } = null;
 	
 	private void InitStateMachine() {
 		StateMachine = new StateMachine<PlayerState>();
@@ -54,6 +60,8 @@ public partial class PlayerController : CharacterBody2D {
 		PlayerAttack1State = new PlayerAttack1State(StateMachine, this, "player_attack_1");
 		PlayerAttack2State = new PlayerAttack2State(StateMachine, this, "player_attack_2");
 		PlayerAttack3State = new PlayerAttack3State(StateMachine, this, "player_attack_3");
+		PlayerHurtState = new PlayerHurtState(StateMachine, this, "player_hurt");
+		PlayerDieState = new PlayerDieState(StateMachine, this, "player_die");
 		StateMachine.InitState(PlayerIdleState);
 	}
 
@@ -63,15 +71,25 @@ public partial class PlayerController : CharacterBody2D {
 		_spriteWrap = GetNode<Node2D>("SpriteWrap");
 		CoyoteTimer = GetNode<Timer>("CoyoteTimer");
 		JumpDelayInputTimer = GetNode<Timer>("JumpDelayInputTimer");
+		ImmuneTimer = GetNode<Timer>("ImmuneTimer");
 		HeadCheck = GetNode<RayCast2D>("SpriteWrap/HeadRayCastChecker");
 		FootCheck = GetNode<RayCast2D>("SpriteWrap/FootRayCastChecker");
 		HurtBox = GetNode<HurtBox>("SpriteWrap/HurtBox");
+		Stat = GetNode<Stat>("Stat");
 		HurtBox.Hurt += OnHurt;
 		InitStateMachine();
 	}
 
 	public void OnHurt(HitBox enemyHitBox) {
-		GD.Print("攻击者" + enemyHitBox.Owner.Name + "Player受到伤害HP-10");
+		// 无敌期间或已死亡
+		if (IsPlayerImmuneNow() || IsDead())
+		{
+			return;
+		}
+		Damage damage = new Damage();
+		damage.amount = 1;
+		damage.source = enemyHitBox.Owner as Node2D;
+		CurrentTakenDamage = damage;
 	}
 	
 	public override void _UnhandledInput(InputEvent @event) {
@@ -89,6 +107,7 @@ public partial class PlayerController : CharacterBody2D {
 	}
 	
 	public override void _Process(double delta) {
+
 		StateMachine.CurrentState.LogicUpdate(delta);
 	}
 
@@ -104,5 +123,28 @@ public partial class PlayerController : CharacterBody2D {
 		float wallCollidingDirection = GetWallNormal().X;
 		return (wallCollidingDirection < 0 && InputDirection > 0) || (wallCollidingDirection > 0 && InputDirection < 0);
 	}
+
+	public void TakeDamage()
+	{
+		Stat.CurrentHealth = Mathf.Max(Stat.CurrentHealth - CurrentTakenDamage.amount, 0);
+		ImmuneTimer.Start();
+		CurrentTakenDamage = null;
+	}
+
+	public bool IsPlayerImmuneNow()
+	{
+		return !ImmuneTimer.IsStopped();
+	}
+
+	public void Die()
+	{
+		GetTree().ReloadCurrentScene();
+	}
+	
+	public bool IsDead()
+	{
+		return Stat.CurrentHealth <= 0;
+	}
+	
 }
 

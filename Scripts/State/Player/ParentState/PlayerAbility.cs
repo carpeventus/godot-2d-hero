@@ -1,4 +1,3 @@
-namespace Hero.Scripts.State.Player.ParentState; 
 
 public class PlayerAbility : PlayerState {
     protected bool IsAbilityDone;

@@ -40,8 +40,8 @@ public class PlayerInAirState : PlayerState {
     }
     public override void LogicUpdate(double delta) {
         base.LogicUpdate(delta);
-        if (!Mathf.IsZeroApprox(player.Velocity.X)) {
-            player.FlipSprite(player.Velocity.X < 0);
+        if (!Mathf.IsZeroApprox(player.InputDirection)) {
+            player.FlipSprite(player.InputDirection < 0);
         }
 
         if (player.Velocity.Y > 0) {
