@@ -76,7 +76,7 @@ public partial class Boar : Enemy {
 
     public void TakeDamage()
     {
-        Stat.CurrentHealth = Mathf.Max(Stat.CurrentHealth - CurrentTakenDamage.amount, 0);
+        Stat.TakeDamage(CurrentTakenDamage.amount);
         CurrentTakenDamage = null;
     }
     

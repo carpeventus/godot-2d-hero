@@ -126,7 +126,7 @@ public partial class PlayerController : CharacterBody2D {
 
 	public void TakeDamage()
 	{
-		Stat.CurrentHealth = Mathf.Max(Stat.CurrentHealth - CurrentTakenDamage.amount, 0);
+		Stat.TakeDamage(CurrentTakenDamage.amount);
 		ImmuneTimer.Start();
 		CurrentTakenDamage = null;
 	}
