@@ -18,6 +18,10 @@ public partial class PlayerController : CharacterBody2D {
 	public PlayerAttack3State PlayerAttack3State { get; private set; }
 	public PlayerHurtState PlayerHurtState { get; private set; }
 	public PlayerDieState PlayerDieState { get; private set; }
+	
+	public PlayerSlideStartState PlayerSlideStartState { get; private set; }
+	public PlayerSlideLoopState PlayerSlideLoopState { get; private set; }
+	public PlayerSlideEndState PlayerSlideEndState { get; private set; }
 	#endregion
 
 	public AnimationPlayer AnimationPlayer { get; private set; }
@@ -41,6 +45,7 @@ public partial class PlayerController : CharacterBody2D {
 	[Export] public float InAirAcceleration { get; private set; } = 100f / 0.1f;
 	[Export] public float FallMulti { get; private set; } = 4f;
 	[Export] public float WallSlideThreshold { get; private set; } = 8f;
+	[Export] public float SlideSpeed { get; private set; } = 80f;
 	[Export] public bool CanCombo { get; private set; } = false;
 	
 	private Node2D _spriteWrap;
@@ -62,6 +67,10 @@ public partial class PlayerController : CharacterBody2D {
 		PlayerAttack3State = new PlayerAttack3State(StateMachine, this, "player_attack_3");
 		PlayerHurtState = new PlayerHurtState(StateMachine, this, "player_hurt");
 		PlayerDieState = new PlayerDieState(StateMachine, this, "player_die");
+		
+		PlayerSlideStartState = new PlayerSlideStartState(StateMachine, this, "slide_start");
+		PlayerSlideLoopState = new PlayerSlideLoopState(StateMachine, this, "slide_loop");
+		PlayerSlideEndState = new PlayerSlideEndState(StateMachine, this, "slide_end");
 		StateMachine.InitState(PlayerIdleState);
 	}
 
@@ -144,6 +153,14 @@ public partial class PlayerController : CharacterBody2D {
 	public bool IsDead()
 	{
 		return Stat.CurrentHealth <= 0;
+	}
+
+	public void Slide(double delta) {
+		Vector2 v = Velocity;
+		v.X = _spriteWrap.Scale.X * SlideSpeed;
+		v.Y += (float) (CurrentGravity * delta);
+		Velocity = v;
+		MoveAndSlide();
 	}
 	
 }
