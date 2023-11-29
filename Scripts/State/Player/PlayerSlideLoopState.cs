@@ -14,6 +14,13 @@ public class PlayerSlideLoopState : PlayerOnFloorState {
         player.Slide(delta);
     }
 
+    public override void LogicUpdate(double delta) {
+        base.LogicUpdate(delta);
+        if (player.IsOnWall()) {
+            stateMachine.ChangeState(player.PlayerSlideEndState);
+        }
+    }
+
     private async void Sliding() {
         await player.ToSignal(player.GetTree().CreateTimer(0.3), SceneTreeTimer.SignalName.Timeout);
         stateMachine.ChangeState(player.PlayerSlideEndState);

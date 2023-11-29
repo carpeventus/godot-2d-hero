@@ -1236,6 +1236,10 @@ one_shot = true
 wait_time = 0.15
 one_shot = true
 
+[node name="SlideDelayInputTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
 [node name="SpriteWrap" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="SpriteWrap"]
@@ -1284,7 +1288,6 @@ shape = SubResource("RectangleShape2D_1gegv")
 disabled = true
 
 [node name="Stat" parent="." instance=ExtResource("6_pfo8d")]
-MaxHealth = 3
 
 [node name="ImmuneTimer" type="Timer" parent="."]
 one_shot = true

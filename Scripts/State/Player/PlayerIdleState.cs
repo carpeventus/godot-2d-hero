@@ -6,9 +6,10 @@ public class PlayerIdleState : PlayerOnFloorState {
     
     public override void LogicUpdate(double delta) {
         base.LogicUpdate(delta);
-        if (Input.IsActionJustPressed("slide")) {
+        if (player.ShouldSlide()) {
             stateMachine.ChangeState(player.PlayerSlideStartState);
         }
+
         if (!Mathf.IsZeroApprox(player.InputDirection)) {
             stateMachine.ChangeState(player.PlayerRunState);
         }

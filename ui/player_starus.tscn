@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://rmyct0e17yvy"]
+[gd_scene load_steps=12 format=3 uid="uid://rmyct0e17yvy"]
 
 [ext_resource type="Texture2D" uid="uid://cm8ck8agx8fnu" path="res://Sprites/char_blue_1.png" id="1_0jlcv"]
 [ext_resource type="Script" path="res://ui/PlayerStarus.cs" id="1_1jvty"]
@@ -30,6 +30,14 @@ region = Rect2(308, 118, 56, 4)
 atlas = ExtResource("1_fugqp")
 region = Rect2(308, 86, 56, 4)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8sgs"]
+atlas = ExtResource("1_fugqp")
+region = Rect2(307, 6, 58, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wnbp"]
+atlas = ExtResource("1_fugqp")
+region = Rect2(308, 135, 56, 2)
+
 [node name="playerStarusBar" type="MarginContainer"]
 offset_right = 41.0
 offset_bottom = 32.0
@@ -55,7 +63,12 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_pybiu")
 stretch_mode = 5
 
-[node name="HealthBar" type="TextureProgressBar" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="HealthBar" type="TextureProgressBar" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 max_value = 1.0
@@ -66,7 +79,7 @@ texture_over = SubResource("AtlasTexture_0bsdj")
 texture_progress = SubResource("AtlasTexture_767p5")
 texture_progress_offset = Vector2(1, 1)
 
-[node name="EaseHealthBar" type="TextureProgressBar" parent="HBoxContainer/HealthBar"]
+[node name="EaseHealthBar" type="TextureProgressBar" parent="HBoxContainer/VBoxContainer/HealthBar"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -81,4 +94,13 @@ value = 0.6
 texture_under = SubResource("AtlasTexture_gr21x")
 texture_over = SubResource("AtlasTexture_0bsdj")
 texture_progress = SubResource("AtlasTexture_dclh4")
+texture_progress_offset = Vector2(1, 1)
+
+[node name="EnegyBar" type="TextureProgressBar" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+texture_over = SubResource("AtlasTexture_e8sgs")
+texture_progress = SubResource("AtlasTexture_3wnbp")
 texture_progress_offset = Vector2(1, 1)

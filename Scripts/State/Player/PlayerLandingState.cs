@@ -7,6 +7,9 @@ public class PlayerLandingState : PlayerOnFloorState {
 
     public override void LogicUpdate(double delta) {
         base.LogicUpdate(delta);
+        if (player.ShouldSlide()) {
+            stateMachine.ChangeState(player.PlayerSlideStartState);
+        }
         if (!Mathf.IsZeroApprox(player.InputDirection)) {
             stateMachine.ChangeState(player.PlayerRunState);
         } else {

@@ -493,9 +493,6 @@ layer_2/tile_data = PackedInt32Array(131078, 524288, 3, 131080, 589824, 3, 72089
 [node name="Player" parent="." instance=ExtResource("2_65h7m")]
 position = Vector2(156, 153)
 
-[node name="HurtBox" parent="Player/SpriteWrap" index="3"]
-monitorable = true
-
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_smoothed = true
 position_smoothing_enabled = true

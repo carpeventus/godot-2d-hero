@@ -28,7 +28,7 @@ public class PlayerOnFloorState : PlayerState {
             player.FlipSprite(player.InputDirection < 0);
         }
         
-        if (shouldJump) {
+        if (player.ShouldJump()) {
             stateMachine.ChangeState(player.PlayerJumpState);
         }
         

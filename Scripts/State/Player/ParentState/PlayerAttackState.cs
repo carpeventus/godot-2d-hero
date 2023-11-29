@@ -29,7 +29,7 @@ public class PlayerAttackState : PlayerState {
             stateMachine.ChangeState(player.PlayerInAirState);
         }
         // 跳跃取消攻击后摇
-        if (shouldJump) {
+        if (player.ShouldJump()) {
             stateMachine.ChangeState(player.PlayerJumpState);
         }
     }

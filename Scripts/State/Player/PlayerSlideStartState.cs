@@ -6,6 +6,8 @@ public class PlayerSlideStartState : PlayerOnFloorState {
 
     public override void OnEnter() {
         base.OnEnter();
+        player.SlideDelayInputTimer.Stop();
+        player.Stat.CurrentEnergy -= player.SlidingCostEnergy;
         WaitForAnimationFinished();
     }
 

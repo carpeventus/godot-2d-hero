@@ -27,6 +27,7 @@ public partial class PlayerController : CharacterBody2D {
 	public AnimationPlayer AnimationPlayer { get; private set; }
 	public Timer CoyoteTimer { get; private set; }
 	public Timer JumpDelayInputTimer { get; private set; }
+	public Timer SlideDelayInputTimer { get; private set; }
 	public Timer ImmuneTimer { get; private set; }
 	public RayCast2D HeadCheck { get; private set; }
 	public RayCast2D FootCheck { get; private set; }
@@ -47,6 +48,7 @@ public partial class PlayerController : CharacterBody2D {
 	[Export] public float WallSlideThreshold { get; private set; } = 8f;
 	[Export] public float SlideSpeed { get; private set; } = 80f;
 	[Export] public bool CanCombo { get; private set; } = false;
+	[Export] public float SlidingCostEnergy { get; private set; } = 4.0f;
 	
 	private Node2D _spriteWrap;
 	public Stat Stat { get; private set; }
@@ -80,6 +82,7 @@ public partial class PlayerController : CharacterBody2D {
 		_spriteWrap = GetNode<Node2D>("SpriteWrap");
 		CoyoteTimer = GetNode<Timer>("CoyoteTimer");
 		JumpDelayInputTimer = GetNode<Timer>("JumpDelayInputTimer");
+		SlideDelayInputTimer = GetNode<Timer>("SlideDelayInputTimer");
 		ImmuneTimer = GetNode<Timer>("ImmuneTimer");
 		HeadCheck = GetNode<RayCast2D>("SpriteWrap/HeadRayCastChecker");
 		FootCheck = GetNode<RayCast2D>("SpriteWrap/FootRayCastChecker");
@@ -108,6 +111,10 @@ public partial class PlayerController : CharacterBody2D {
 
 		if (@event.IsActionPressed("attack") && CanCombo) {
 			IsAttackComboRequested = true;
+		}
+		
+		if (@event.IsActionPressed("slide")) {
+			SlideDelayInputTimer.Start();
 		}
 	}
 
@@ -162,6 +169,26 @@ public partial class PlayerController : CharacterBody2D {
 		Velocity = v;
 		MoveAndSlide();
 	}
+
+	public bool ShouldJump() {
+		return (IsOnFloor() || CoyoteTimer.TimeLeft > 0) && JumpDelayInputTimer.TimeLeft > 0;
+	}
 	
+	public bool ShouldSlide() {
+		if (Stat.CurrentEnergy < SlidingCostEnergy) {
+			GD.Print("XX");
+
+			return false;
+		}
+		if (SlideDelayInputTimer.IsStopped()) {
+			return false;
+		}
+
+		if (FootCheck.IsColliding()) {
+			GD.Print("HH");
+			return false;
+		}
+		return true;
+	}
 }
 

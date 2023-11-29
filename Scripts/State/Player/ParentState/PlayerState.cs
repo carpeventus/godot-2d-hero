@@ -5,7 +5,6 @@ public class PlayerState : IStateMachineState {
     protected PlayerController player;
     protected StateMachine<PlayerState> stateMachine;
     protected string animationName;
-    protected bool shouldJump;
     
     public PlayerState(StateMachine<PlayerState> stateMachine, PlayerController player, string animationName) {
         this.stateMachine = stateMachine;
@@ -32,7 +31,6 @@ public class PlayerState : IStateMachineState {
 
     public virtual void LogicUpdate(double delta) {
         player.InputDirection = Input.GetAxis("move_left", "move_right");
-        shouldJump = (player.IsOnFloor() || player.CoyoteTimer.TimeLeft > 0) && player.JumpDelayInputTimer.TimeLeft > 0;
         
         if (player.CurrentTakenDamage is not null)
         {
