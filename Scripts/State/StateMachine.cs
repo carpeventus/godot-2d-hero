@@ -1,5 +1,3 @@
-
-
 using System.Collections.Generic;
 
 public class StateMachine<T> where T : IStateMachineState {
@@ -7,8 +5,8 @@ public class StateMachine<T> where T : IStateMachineState {
     public T PreviousState { get; private set; }
     
     public void InitState(T initState) {
+        initState.OnEnter();
         CurrentState = initState;
-        CurrentState.OnEnter();
     }
 
     public void ChangeState(T newState) {
@@ -18,8 +16,8 @@ public class StateMachine<T> where T : IStateMachineState {
             return;
         }
         CurrentState.OnExit();
+        newState.OnEnter();
         PreviousState = CurrentState;
         CurrentState = newState;
-        CurrentState.OnEnter();
     }
 }

@@ -32,10 +32,5 @@ public class PlayerState : IStateMachineState {
     public virtual void LogicUpdate(double delta) {
         player.InputDirection = Input.GetAxis("move_left", "move_right");
         
-        if (player.CurrentTakenDamage is not null)
-        {
-            stateMachine.ChangeState(player.PlayerHurtState);
-        }
-        
     }
 }

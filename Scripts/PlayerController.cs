@@ -102,6 +102,10 @@ public partial class PlayerController : CharacterBody2D {
 		damage.amount = 1;
 		damage.source = enemyHitBox.Owner as Node2D;
 		CurrentTakenDamage = damage;
+		
+		Stat.TakeDamage(damage.amount);
+		// 受伤直接由切换到受伤状态
+		StateMachine.ChangeState(PlayerHurtState);
 	}
 	
 	public override void _UnhandledInput(InputEvent @event) {
@@ -142,7 +146,7 @@ public partial class PlayerController : CharacterBody2D {
 
 	public void TakeDamage()
 	{
-		Stat.TakeDamage(CurrentTakenDamage.amount);
+		
 		ImmuneTimer.Start();
 		CurrentTakenDamage = null;
 	}
@@ -176,7 +180,6 @@ public partial class PlayerController : CharacterBody2D {
 	
 	public bool ShouldSlide() {
 		if (Stat.CurrentEnergy < SlidingCostEnergy) {
-			GD.Print("XX");
 
 			return false;
 		}
@@ -185,7 +188,6 @@ public partial class PlayerController : CharacterBody2D {
 		}
 
 		if (FootCheck.IsColliding()) {
-			GD.Print("HH");
 			return false;
 		}
 		return true;
