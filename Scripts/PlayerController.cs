@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -25,6 +27,7 @@ public partial class PlayerController : CharacterBody2D {
 	#endregion
 
 	public AnimationPlayer AnimationPlayer { get; private set; }
+	public AnimatedSprite2D InteractFlag { get; private set; }
 	public Timer CoyoteTimer { get; private set; }
 	public Timer JumpDelayInputTimer { get; private set; }
 	public Timer SlideDelayInputTimer { get; private set; }
@@ -52,6 +55,8 @@ public partial class PlayerController : CharacterBody2D {
 	
 	private Node2D _spriteWrap;
 	public Stat Stat { get; private set; }
+
+	public Dictionary<string, Interactable> InteractableWithDict { get; set; } = new();
 
 	public Damage CurrentTakenDamage { get; private set; } = null;
 	
@@ -88,8 +93,13 @@ public partial class PlayerController : CharacterBody2D {
 		FootCheck = GetNode<RayCast2D>("SpriteWrap/FootRayCastChecker");
 		HurtBox = GetNode<HurtBox>("SpriteWrap/HurtBox");
 		Stat = GetNode<Stat>("Stat");
+		InteractFlag = GetNode<AnimatedSprite2D>("InteractFlag");
 		HurtBox.Hurt += OnHurt;
 		InitStateMachine();
+	}
+
+	public void UpdateInteractFlagVisible() {
+		InteractFlag.Visible = InteractableWithDict.Count > 0;
 	}
 
 	public void OnHurt(HitBox enemyHitBox) {
@@ -119,6 +129,10 @@ public partial class PlayerController : CharacterBody2D {
 		
 		if (@event.IsActionPressed("slide")) {
 			SlideDelayInputTimer.Start();
+		}
+		
+		if (@event.IsActionPressed("interact") && InteractableWithDict.Count > 0) {
+			InteractableWithDict.Last().Value.Interact();
 		}
 	}
 

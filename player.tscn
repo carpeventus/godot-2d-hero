@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bos0k7qod7m1g"]
+[gd_scene load_steps=30 format=3 uid="uid://bos0k7qod7m1g"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.cs" id="1_4k1e4"]
 [ext_resource type="Texture2D" uid="uid://cm8ck8agx8fnu" path="res://Sprites/char_blue_1.png" id="1_uk15c"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/HurtBox.cs" id="4_y775w"]
 [ext_resource type="Script" path="res://Scripts/HitBox.cs" id="5_ief2k"]
 [ext_resource type="PackedScene" uid="uid://btvryo3rwtlro" path="res://stat.tscn" id="6_pfo8d"]
+[ext_resource type="PackedScene" uid="uid://c4n8c6y3ap58i" path="res://interact_flag.tscn" id="7_w8blp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtv5n"]
 size = Vector2(12, 32)
@@ -1291,3 +1292,6 @@ disabled = true
 
 [node name="ImmuneTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="InteractFlag" parent="." instance=ExtResource("7_w8blp")]
+position = Vector2(2.08165e-12, -42)
