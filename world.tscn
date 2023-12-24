@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dyvduvk6ff6ha"]
+[gd_scene load_steps=12 format=3 uid="uid://dyvduvk6ff6ha"]
 
 [ext_resource type="Script" path="res://Scripts/World.cs" id="1_vgywf"]
 [ext_resource type="Texture2D" uid="uid://hlbi3uml12pk" path="res://Sprites/Trees/Tree-Assets.png" id="2_7hh1s"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://rmyct0e17yvy" path="res://ui/player_starus.tscn" id="2_rb5ry"]
 [ext_resource type="Texture2D" uid="uid://m1nbi5tm3xci" path="res://Sprites/Background/Background.png" id="4_dia6v"]
 [ext_resource type="PackedScene" uid="uid://bumy0hd14wura" path="res://boar.tscn" id="4_jx7mu"]
+[ext_resource type="PackedScene" uid="uid://duuf7ld23j5e6" path="res://entry_point.tscn" id="5_d5m2j"]
 [ext_resource type="Texture2D" uid="uid://ba3bii1bw3reg" path="res://Sprites/Trees/Background.png" id="5_sxkuf"]
 [ext_resource type="PackedScene" uid="uid://bf3jurrk3fkf" path="res://mine_gate.tscn" id="8_cr4by"]
 
@@ -478,8 +479,7 @@ metadata/_edit_vertical_guides_ = [3569.0]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="PlayerStarusHBoxContainer" parent="HUD" node_paths=PackedStringArray("PlayerStat") instance=ExtResource("2_rb5ry")]
-PlayerStat = NodePath("../../Player/Stat")
+[node name="PlayerStarusHBoxContainer" parent="HUD" instance=ExtResource("2_rb5ry")]
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 0)
@@ -491,8 +491,20 @@ layer_1/tile_data = PackedInt32Array(917502, 655360, 0, 917501, 458752, 2, 91750
 layer_2/name = "Front"
 layer_2/tile_data = PackedInt32Array(131078, 524288, 3, 131080, 589824, 3, 720899, 589824, 2, 327704, 524288, 3, 327705, 393216, 3, 327709, 393216, 3, 65535, 524288, 2, 4, 589824, 2, 3, 393216, 3, 917518, 589824, 3, 917525, 589824, 2, 917524, 458752, 3, 917523, 655360, 2, 917522, 393216, 3, 917520, 589824, 2, 917513, 589824, 2, 917511, 589824, 2, 917515, 589824, 2, 917517, 655360, 2, 917519, 458752, 3, 327707, 589824, 2)
 
-[node name="MineGate" parent="TileMap" instance=ExtResource("8_cr4by")]
+[node name="MineGateRight" parent="TileMap" instance=ExtResource("8_cr4by")]
 position = Vector2(351, 240)
+ToEntryName = "EntryPointLeft"
+
+[node name="MineGateLeft" parent="TileMap" instance=ExtResource("8_cr4by")]
+position = Vector2(-7, 240)
+scale = Vector2(-1, 1)
+ToEntryName = "EntryPointRight"
+
+[node name="EntryPointLeft" parent="TileMap" instance=ExtResource("5_d5m2j")]
+position = Vector2(41, 240)
+
+[node name="EntryPointRight" parent="TileMap" instance=ExtResource("5_d5m2j")]
+position = Vector2(313, 240)
 
 [node name="Player" parent="." instance=ExtResource("2_65h7m")]
 position = Vector2(217, 236)

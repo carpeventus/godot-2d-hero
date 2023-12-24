@@ -54,7 +54,7 @@ public partial class PlayerController : CharacterBody2D {
 	[Export] public float SlidingCostEnergy { get; private set; } = 4.0f;
 	
 	private Node2D _spriteWrap;
-	public Stat Stat { get; private set; }
+	public GameGlobal GameGlobal { get; private set; }
 
 	public Dictionary<string, Interactable> InteractableWithDict { get; set; } = new();
 
@@ -92,7 +92,8 @@ public partial class PlayerController : CharacterBody2D {
 		HeadCheck = GetNode<RayCast2D>("SpriteWrap/HeadRayCastChecker");
 		FootCheck = GetNode<RayCast2D>("SpriteWrap/FootRayCastChecker");
 		HurtBox = GetNode<HurtBox>("SpriteWrap/HurtBox");
-		Stat = GetNode<Stat>("Stat");
+		
+		GameGlobal = GetNode<GameGlobal>("/root/GameGlobal");
 		InteractFlag = GetNode<AnimatedSprite2D>("InteractFlag");
 		HurtBox.Hurt += OnHurt;
 		InitStateMachine();
@@ -113,7 +114,7 @@ public partial class PlayerController : CharacterBody2D {
 		damage.source = enemyHitBox.Owner as Node2D;
 		CurrentTakenDamage = damage;
 		
-		Stat.TakeDamage(damage.amount);
+		GameGlobal.Stat.TakeDamage(damage.amount);
 		// 受伤直接由切换到受伤状态
 		StateMachine.ChangeState(PlayerHurtState);
 	}
@@ -177,7 +178,7 @@ public partial class PlayerController : CharacterBody2D {
 	
 	public bool IsDead()
 	{
-		return Stat.CurrentHealth <= 0;
+		return GameGlobal.Stat.CurrentHealth <= 0;
 	}
 
 	public void Slide(double delta) {
@@ -193,7 +194,7 @@ public partial class PlayerController : CharacterBody2D {
 	}
 	
 	public bool ShouldSlide() {
-		if (Stat.CurrentEnergy < SlidingCostEnergy) {
+		if (GameGlobal.Stat.CurrentEnergy < SlidingCostEnergy) {
 
 			return false;
 		}
@@ -205,6 +206,10 @@ public partial class PlayerController : CharacterBody2D {
 			return false;
 		}
 		return true;
+	}
+
+	public void MoveToEntrypoint(Vector2 pos) {
+		GlobalPosition = pos;
 	}
 }
 

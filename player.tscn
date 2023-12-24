@@ -1,11 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://bos0k7qod7m1g"]
+[gd_scene load_steps=29 format=3 uid="uid://bos0k7qod7m1g"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.cs" id="1_4k1e4"]
 [ext_resource type="Texture2D" uid="uid://cm8ck8agx8fnu" path="res://Sprites/char_blue_1.png" id="1_uk15c"]
 [ext_resource type="Texture2D" uid="uid://bqqgm70b348g1" path="res://Sprites/char_blue_2.png" id="2_yvxci"]
 [ext_resource type="Script" path="res://Scripts/HurtBox.cs" id="4_y775w"]
 [ext_resource type="Script" path="res://Scripts/HitBox.cs" id="5_ief2k"]
-[ext_resource type="PackedScene" uid="uid://btvryo3rwtlro" path="res://stat.tscn" id="6_pfo8d"]
 [ext_resource type="PackedScene" uid="uid://c4n8c6y3ap58i" path="res://interact_flag.tscn" id="7_w8blp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtv5n"]
@@ -1213,7 +1212,7 @@ size = Vector2(13, 13)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1gegv"]
 size = Vector2(12, 25)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(2.08165e-12, 2.08165e-12)
 collision_layer = 2
 script = ExtResource("1_4k1e4")
@@ -1287,8 +1286,6 @@ disabled = true
 position = Vector2(24, -18.5)
 shape = SubResource("RectangleShape2D_1gegv")
 disabled = true
-
-[node name="Stat" parent="." instance=ExtResource("6_pfo8d")]
 
 [node name="ImmuneTimer" type="Timer" parent="."]
 one_shot = true

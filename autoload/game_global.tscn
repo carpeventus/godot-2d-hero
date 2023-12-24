@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c34ran2y5pata"]
+
+[ext_resource type="Script" path="res://GameGlobal.cs" id="1_cmcra"]
+[ext_resource type="Script" path="res://Scripts/Stat.cs" id="2_x2lmd"]
+
+[node name="GameGlobal" type="Node"]
+script = ExtResource("1_cmcra")
+
+[node name="Stat" type="Node" parent="."]
+script = ExtResource("2_x2lmd")

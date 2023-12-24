@@ -4,6 +4,9 @@ using System;
 public partial class World : Node2D {
 	private Camera2D _camera;
 	private TileMap _tileMap;
+	
+	public GameGlobal GameGlobal { get; private set; } 
+	
 	public override void _Ready() {
 		_camera = GetNode<Camera2D>("Player/Camera2D");
 		_tileMap = GetNode<TileMap>("TileMap");
@@ -14,6 +17,9 @@ public partial class World : Node2D {
 		_camera.LimitBottom = used.End.Y * tileSize.Y;
 		_camera.LimitLeft = used.Position.X * tileSize.X;
 		_camera.ResetSmoothing();
+		GameGlobal = GetNode<GameGlobal>("/root/GameGlobal");
+		GameGlobal.Camera2D = _camera;
+		
 	}
 	
 }

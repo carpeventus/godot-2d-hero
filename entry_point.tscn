@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://duuf7ld23j5e6"]
+
+[ext_resource type="Script" path="res://EntryPoint.cs" id="1_sfy8a"]
+
+[node name="EntryPoint" type="Marker2D"]
+script = ExtResource("1_sfy8a")

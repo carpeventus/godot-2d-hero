@@ -16,6 +16,10 @@ run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameGlobal="*res://autoload/game_global.tscn"
+
 [display]
 
 window/size/viewport_width=384

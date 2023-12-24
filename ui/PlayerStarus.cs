@@ -2,16 +2,23 @@ using Godot;
 using System;
 
 public partial class PlayerStarus : MarginContainer {
-	[Export] public Stat PlayerStat;
 	private TextureProgressBar _healthProgressBar;
 	private TextureProgressBar _energyProgressBar;
 	private TextureProgressBar _easeHealthProgressBar;
+	public GameGlobal GameGlobal { get; private set; } 
+
 	public override void _Ready() {
+		GameGlobal = GetNode<GameGlobal>("/root/GameGlobal");
 		_healthProgressBar = GetNode<TextureProgressBar>("HBoxContainer/VBoxContainer/HealthBar");
 		_energyProgressBar = GetNode<TextureProgressBar>("HBoxContainer/VBoxContainer/EnegyBar");
 		_easeHealthProgressBar = GetNode<TextureProgressBar>("HBoxContainer/VBoxContainer/HealthBar/EaseHealthBar");
-		PlayerStat.HealthChanged += OnHealthChanged;
-		PlayerStat.EnergyChanged += OnEnergyChanged;
+		GameGlobal.Stat.HealthChanged += OnHealthChanged;
+		GameGlobal.Stat.EnergyChanged += OnEnergyChanged;
+	}
+
+	public override void _ExitTree() {
+		GameGlobal.Stat.HealthChanged -= OnHealthChanged;
+		GameGlobal.Stat.EnergyChanged -= OnEnergyChanged;
 	}
 
 	private void OnHealthChanged() {
@@ -23,14 +30,14 @@ public partial class PlayerStarus : MarginContainer {
 	}
 
 	private void ShowHealth() {
-		var percent = (float) PlayerStat.CurrentHealth / PlayerStat.MaxHealth;
+		var percent = (float) GameGlobal.Stat.CurrentHealth / GameGlobal.Stat.MaxHealth;
 		_healthProgressBar.Value = percent;
 		var tween = CreateTween();
 		tween.TweenProperty(_easeHealthProgressBar, "value", percent, 0.3f);
 	}
 	
 	private void ShowEnergy() {
-		var percent = PlayerStat.CurrentEnergy / PlayerStat.MaxEnergy;
+		var percent = GameGlobal.Stat.CurrentEnergy / GameGlobal.Stat.MaxEnergy;
 		_energyProgressBar.Value = percent;
 	}
 }

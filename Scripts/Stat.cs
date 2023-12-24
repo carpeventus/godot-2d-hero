@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class Stat : Node
 {
     [Export] public int MaxHealth = 3;
@@ -13,7 +14,7 @@ public partial class Stat : Node
     [Signal]
     public delegate void EnergyChangedEventHandler();
 
-    public int CurrentHealth { get; private set; }
+    public int CurrentHealth { get; set; }
     public float CurrentEnergy { get;  set; }
 
     public void TakeDamage(int damage) {
