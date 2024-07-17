@@ -212,4 +212,3 @@ public partial class PlayerController : CharacterBody2D {
 		GlobalPosition = pos;
 	}
 }
-
