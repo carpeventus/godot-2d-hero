@@ -18,6 +18,7 @@ public partial class World : Node2D {
 		_camera.LimitBottom = used.End.Y * tileSize.Y;
 		_camera.LimitLeft = used.Position.X * tileSize.X;
 		_camera.ResetSmoothing();
+		_camera.ForceUpdateScroll();
 		GameGlobal = GetNode<GameGlobal>("/root/GameGlobal");
 		GameGlobal.Camera2D = _camera;
 		

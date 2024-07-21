@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c34ran2y5pata"]
+[gd_scene load_steps=4 format=3 uid="uid://c34ran2y5pata"]
 
 [ext_resource type="Script" path="res://GameGlobal.cs" id="1_cmcra"]
 [ext_resource type="Script" path="res://Scripts/Stat.cs" id="2_x2lmd"]
+[ext_resource type="PackedScene" uid="uid://d0b3twq4ooho3" path="res://scene_fade.tscn" id="3_gmitl"]
 
 [node name="GameGlobal" type="Node"]
 script = ExtResource("1_cmcra")
 
 [node name="Stat" type="Node" parent="."]
 script = ExtResource("2_x2lmd")
+
+[node name="SceneFade" parent="." instance=ExtResource("3_gmitl")]

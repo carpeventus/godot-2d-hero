@@ -47,7 +47,7 @@ public partial class PlayerController : CharacterBody2D {
 	[Export] public Vector2 WallJumpVelocity { get; private set; } = new Vector2(300, -300f);
 	[Export] public float MoveAcceleration { get; private set; } =  100f/ 0.2f;
 	[Export] public float InAirAcceleration { get; private set; } = 100f / 0.1f;
-	[Export] public float FallMulti { get; private set; } = 4f;
+	[Export] public float FallMulti { get; private set; } = 3f;
 	[Export] public float WallSlideThreshold { get; private set; } = 8f;
 	[Export] public float SlideSpeed { get; private set; } = 80f;
 	[Export] public bool CanCombo { get; private set; } = false;

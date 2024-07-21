@@ -404,6 +404,9 @@ editor_draw_drag_margin = true
 [node name="Boar" parent="." instance=ExtResource("4_jx7mu")]
 position = Vector2(239, 155)
 
+[node name="Boar2" parent="." instance=ExtResource("4_jx7mu")]
+position = Vector2(152, 240)
+
 [node name="Decorations" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
