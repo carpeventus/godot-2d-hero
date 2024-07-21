@@ -24,6 +24,12 @@ public partial class Stat : Node
 
     public override void _Ready()
     {
+        ResetHealthAndEnergy();
+    }
+
+    public void ResetHealthAndEnergy()
+    {
+        
         CurrentHealth = MaxHealth;
         CurrentEnergy = MaxEnergy;
         EmitSignal(SignalName.HealthChanged);

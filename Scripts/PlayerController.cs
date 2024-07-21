@@ -174,6 +174,7 @@ public partial class PlayerController : CharacterBody2D {
 	public void Die()
 	{
 		GetTree().ReloadCurrentScene();
+		GameGlobal.Stat.ResetHealthAndEnergy();
 	}
 	
 	public bool IsDead()

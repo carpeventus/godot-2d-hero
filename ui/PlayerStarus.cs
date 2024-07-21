@@ -14,6 +14,8 @@ public partial class PlayerStarus : MarginContainer {
 		_easeHealthProgressBar = GetNode<TextureProgressBar>("HBoxContainer/VBoxContainer/HealthBar/EaseHealthBar");
 		GameGlobal.Stat.HealthChanged += OnHealthChanged;
 		GameGlobal.Stat.EnergyChanged += OnEnergyChanged;
+		ShowEnergy();
+		ShowHealth();
 	}
 
 	public override void _ExitTree() {

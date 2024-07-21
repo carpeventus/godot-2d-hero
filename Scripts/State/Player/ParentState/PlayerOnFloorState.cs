@@ -21,7 +21,7 @@ public class PlayerOnFloorState : PlayerState {
     public override void LogicUpdate(double delta) {
         base.LogicUpdate(delta);
         if (player.IsDead())
-        {
+        { 
             stateMachine.ChangeState(player.PlayerDieState);
         }
         if (!Mathf.IsZeroApprox(player.InputDirection)) {
