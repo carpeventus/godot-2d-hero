@@ -1,17 +1,14 @@
-[gd_scene load_steps=12 format=4 uid="uid://dyvduvk6ff6ha"]
+[gd_scene load_steps=9 format=4 uid="uid://dyy46bmoxq7ws"]
 
-[ext_resource type="Script" path="res://Scripts/World.cs" id="1_vgywf"]
-[ext_resource type="Texture2D" uid="uid://hlbi3uml12pk" path="res://Sprites/Trees/Tree-Assets.png" id="2_7hh1s"]
-[ext_resource type="PackedScene" uid="uid://bos0k7qod7m1g" path="res://player.tscn" id="2_65h7m"]
-[ext_resource type="PackedScene" uid="uid://rmyct0e17yvy" path="res://ui/player_starus.tscn" id="2_rb5ry"]
-[ext_resource type="Texture2D" uid="uid://m1nbi5tm3xci" path="res://Sprites/Background/Background.png" id="4_dia6v"]
-[ext_resource type="PackedScene" uid="uid://bumy0hd14wura" path="res://boar.tscn" id="4_jx7mu"]
-[ext_resource type="PackedScene" uid="uid://duuf7ld23j5e6" path="res://entry_point.tscn" id="5_d5m2j"]
-[ext_resource type="Texture2D" uid="uid://ba3bii1bw3reg" path="res://Sprites/Trees/Background.png" id="5_sxkuf"]
-[ext_resource type="PackedScene" uid="uid://bf3jurrk3fkf" path="res://mine_gate.tscn" id="8_cr4by"]
+[ext_resource type="Script" path="res://Scripts/World.cs" id="1_hmhyg"]
+[ext_resource type="PackedScene" uid="uid://rmyct0e17yvy" path="res://ui/player_starus.tscn" id="2_lf753"]
+[ext_resource type="PackedScene" uid="uid://bf3jurrk3fkf" path="res://mine_gate.tscn" id="3_5vgsm"]
+[ext_resource type="PackedScene" uid="uid://duuf7ld23j5e6" path="res://entry_point.tscn" id="4_dqa0m"]
+[ext_resource type="Texture2D" uid="uid://hlbi3uml12pk" path="res://Sprites/Trees/Tree-Assets.png" id="5_gkeuq"]
+[ext_resource type="PackedScene" uid="uid://bos0k7qod7m1g" path="res://player.tscn" id="6_1bsef"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ba1sd"]
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("5_gkeuq")
 1:2/0 = 0
 1:2/0/terrain_set = 0
 1:2/0/terrain = 0
@@ -357,29 +354,24 @@ terrain_set_0/terrain_1/name = "Leaves"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_ba1sd")
 
-[node name="World" type="Node2D"]
-script = ExtResource("1_vgywf")
+[node name="World2" type="Node2D"]
+script = ExtResource("1_hmhyg")
 metadata/_edit_vertical_guides_ = [3569.0]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="PlayerStarusHBoxContainer" parent="HUD" instance=ExtResource("2_rb5ry")]
+[node name="PlayerStarusHBoxContainer" parent="HUD" instance=ExtResource("2_lf753")]
 
 [node name="TileMap" type="Node2D" parent="."]
 
-[node name="MineGateLeft" parent="TileMap" instance=ExtResource("8_cr4by")]
-position = Vector2(352, 240)
+[node name="MineGateLeft" parent="TileMap" instance=ExtResource("3_5vgsm")]
+position = Vector2(-7, 240)
 rotation = -3.14159
-scale = Vector2(-1, -1)
-ScenePath = "res://world2.tscn"
-ToEntryName = "World2EntryPoint"
+scale = Vector2(1, -1)
+ToEntryName = "WorldEntryPoint"
 
-[node name="WorldEntryPoint" parent="TileMap" instance=ExtResource("5_d5m2j")]
-position = Vector2(320, 240)
-
-[node name="BackGround" type="TileMapLayer" parent="TileMap"]
-use_parent_material = true
-tile_set = SubResource("TileSet_ki5qo")
+[node name="World2EntryPoint" parent="TileMap" instance=ExtResource("4_dqa0m")]
+position = Vector2(41, 240)
 
 [node name="Platform" type="TileMapLayer" parent="TileMap"]
 use_parent_material = true
@@ -391,7 +383,7 @@ use_parent_material = true
 tile_map_data = PackedByteArray("AAAGAAIAAAAIAAMAAAAIAAIAAAAJAAMAAAADAAsAAAAJAAIAAAAYAAUAAAAIAAMAAAAZAAUAAAAGAAMAAAAdAAUAAAAGAAMAAAD//wAAAAAIAAIAAAAEAAAAAAAJAAIAAAADAAAAAAAGAAMAAAAOAA4AAAAJAAMAAAAVAA4AAAAJAAIAAAAUAA4AAAAHAAMAAAATAA4AAAAKAAIAAAASAA4AAAAGAAMAAAAQAA4AAAAJAAIAAAAJAA4AAAAJAAIAAAAHAA4AAAAJAAIAAAALAA4AAAAJAAIAAAANAA4AAAAKAAIAAAAPAA4AAAAHAAMAAAAbAAUAAAAJAAIAAAA=")
 tile_set = SubResource("TileSet_ki5qo")
 
-[node name="Player" parent="." instance=ExtResource("2_65h7m")]
+[node name="Player" parent="." instance=ExtResource("6_1bsef")]
 position = Vector2(217, 236)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -400,183 +392,5 @@ position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_drag_margin = true
-
-[node name="Boar" parent="." instance=ExtResource("4_jx7mu")]
-position = Vector2(239, 155)
-
-[node name="Decorations" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="Decorations"]
-
-[node name="Sky" type="ParallaxLayer" parent="Decorations/ParallaxBackground"]
-motion_scale = Vector2(0.2, 0.1)
-motion_mirroring = Vector2(480, 2.08165e-12)
-
-[node name="Background" type="Sprite2D" parent="Decorations/ParallaxBackground/Sky"]
-texture = ExtResource("4_dia6v")
-centered = false
-
-[node name="Hills" type="ParallaxLayer" parent="Decorations/ParallaxBackground"]
-motion_scale = Vector2(0.4, 1)
-motion_mirroring = Vector2(384, 2.08165e-12)
-
-[node name="Background" type="Sprite2D" parent="Decorations/ParallaxBackground/Hills"]
-texture = ExtResource("5_sxkuf")
-centered = false
-region_enabled = true
-region_rect = Rect2(800, 0, 96, 256)
-
-[node name="Background3" type="Sprite2D" parent="Decorations/ParallaxBackground/Hills"]
-position = Vector2(192, -1)
-texture = ExtResource("5_sxkuf")
-centered = false
-region_enabled = true
-region_rect = Rect2(800, 0, 96, 256)
-
-[node name="Background4" type="Sprite2D" parent="Decorations/ParallaxBackground/Hills"]
-position = Vector2(288, 2.08165e-12)
-texture = ExtResource("5_sxkuf")
-centered = false
-region_enabled = true
-region_rect = Rect2(800, 0, 96, 256)
-
-[node name="Background2" type="Sprite2D" parent="Decorations/ParallaxBackground/Hills"]
-position = Vector2(96, 0)
-texture = ExtResource("5_sxkuf")
-centered = false
-region_enabled = true
-region_rect = Rect2(800, 0, 96, 256)
-
-[node name="Trees" type="ParallaxLayer" parent="Decorations/ParallaxBackground"]
-motion_scale = Vector2(0.6, 1)
-motion_mirroring = Vector2(384, 2.08165e-12)
-
-[node name="Background" type="Sprite2D" parent="Decorations/ParallaxBackground/Trees"]
-position = Vector2(0, 64)
-texture = ExtResource("5_sxkuf")
-centered = false
-region_enabled = true
-region_rect = Rect2(112, 0, 96, 256)
-
-[node name="Background2" type="Sprite2D" parent="Decorations/ParallaxBackground/Trees"]
-position = Vector2(96, 64)
-texture = ExtResource("5_sxkuf")
-centered = false
-region_enabled = true
-region_rect = Rect2(112, 0, 96, 256)
-
-[node name="Background3" type="Sprite2D" parent="Decorations/ParallaxBackground/Trees"]
-position = Vector2(192, 64)
-texture = ExtResource("5_sxkuf")
-centered = false
-region_enabled = true
-region_rect = Rect2(112, 0, 96, 256)
-
-[node name="Background4" type="Sprite2D" parent="Decorations/ParallaxBackground/Trees"]
-position = Vector2(288, 64)
-texture = ExtResource("5_sxkuf")
-centered = false
-region_enabled = true
-region_rect = Rect2(112, 0, 96, 256)
-
-[node name="Bushed" type="ParallaxLayer" parent="Decorations/ParallaxBackground"]
-motion_scale = Vector2(0.9, 1)
-
-[node name="Tree-assets" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
-position = Vector2(22, 233)
-texture = ExtResource("2_7hh1s")
-region_enabled = true
-region_rect = Rect2(210, 5, 124, 86)
-
-[node name="Tree-assets2" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
-position = Vector2(174, 230)
-texture = ExtResource("2_7hh1s")
-region_enabled = true
-region_rect = Rect2(210, 5, 124, 86)
-
-[node name="Tree-assets4" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
-position = Vector2(267, 80)
-texture = ExtResource("2_7hh1s")
-region_enabled = true
-region_rect = Rect2(210, 5, 124, 86)
-
-[node name="Tree-assets5" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
-position = Vector2(407, 94)
-texture = ExtResource("2_7hh1s")
-region_enabled = true
-region_rect = Rect2(210, 5, 124, 86)
-
-[node name="Tree-assets6" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
-position = Vector2(288, 16)
-texture = ExtResource("2_7hh1s")
-region_enabled = true
-region_rect = Rect2(210, 5, 124, 86)
-
-[node name="Tree-assets7" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
-position = Vector2(97, 37)
-texture = ExtResource("2_7hh1s")
-region_enabled = true
-region_rect = Rect2(210, 5, 124, 86)
-
-[node name="Tree-assets8" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
-position = Vector2(97, 37)
-texture = ExtResource("2_7hh1s")
-region_enabled = true
-region_rect = Rect2(210, 5, 124, 86)
-
-[node name="Tree-assets9" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
-position = Vector2(395, 234)
-texture = ExtResource("2_7hh1s")
-region_enabled = true
-region_rect = Rect2(210, 5, 124, 86)
-
-[node name="Tree-assets10" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
-position = Vector2(395, 234)
-texture = ExtResource("2_7hh1s")
-region_enabled = true
-region_rect = Rect2(210, 5, 124, 86)
-
-[node name="ParallaxForeground" type="ParallaxBackground" parent="Decorations"]
-layer = 1
-
-[node name="Bushes" type="ParallaxLayer" parent="Decorations/ParallaxForeground"]
-motion_scale = Vector2(1.2, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="Decorations/ParallaxForeground/Bushes"]
-position = Vector2(-63, 238)
-texture = ExtResource("2_7hh1s")
-centered = false
-region_enabled = true
-region_rect = Rect2(210, 293, 124, 86)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Decorations/ParallaxForeground/Bushes"]
-position = Vector2(52, 234)
-texture = ExtResource("2_7hh1s")
-centered = false
-region_enabled = true
-region_rect = Rect2(210, 293, 124, 86)
-
-[node name="Sprite2D3" type="Sprite2D" parent="Decorations/ParallaxForeground/Bushes"]
-position = Vector2(168, 235)
-texture = ExtResource("2_7hh1s")
-centered = false
-region_enabled = true
-region_rect = Rect2(210, 293, 124, 86)
-
-[node name="Sprite2D4" type="Sprite2D" parent="Decorations/ParallaxForeground/Bushes"]
-position = Vector2(281, 233)
-texture = ExtResource("2_7hh1s")
-centered = false
-region_enabled = true
-region_rect = Rect2(210, 293, 124, 86)
-
-[node name="Sprite2D5" type="Sprite2D" parent="Decorations/ParallaxForeground/Bushes"]
-position = Vector2(281, 233)
-texture = ExtResource("2_7hh1s")
-centered = false
-region_enabled = true
-region_rect = Rect2(210, 293, 124, 86)
 
 [editable path="Player"]
