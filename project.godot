@@ -33,6 +33,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="Hero"
 
+[global_group]
+
+Enemy=""
+
 [input]
 
 move_left={

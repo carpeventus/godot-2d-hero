@@ -16,7 +16,6 @@ public partial class Enemy : CharacterBody2D
 		CurrentGravity = DefaultGravity;
 		SpriteWrap = GetNode<Node2D>("SpriteWrap");
 		AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		AddToGroup("Enemy");
 	}
 
 	public virtual void Flip() {

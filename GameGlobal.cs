@@ -1,27 +1,30 @@
 using System.Collections.Generic;
 using Godot;
-using System.Linq;
 using Godot.Collections;
 
 public partial class GameGlobal : Node
 {
+    public readonly string UserDataFilePath = "user://game.tres";
+
     public Camera2D Camera2D { get; set; }
     public Stat Stat { get; set; }
 
     public Godot.Collections.Dictionary<string, EnemyAliveState> WorldState =
         new Godot.Collections.Dictionary<string, EnemyAliveState>();
+
     public ColorRect ColorRect { get; set; }
     
     public override void _Ready() {
         Stat = GetNode<Stat>("Stat");
         ColorRect = GetNode<ColorRect>("SceneFade/ColorRect");
         ColorRect.Color = new Color(ColorRect.Color,0.0f);
+        LoadGame();
     }
 
     public async void ChangeScene(string path, string entryPointName)
     {
-        var oldSceneName = GetTree().CurrentScene.SceneFilePath.GetBaseName();
-        WorldState[oldSceneName] = ToDict(GetTree());
+        // Save
+        SaveGame();
         var tween = GetTree().CreateTween();
         tween.TweenProperty(ColorRect, "color:a", 1, 0.2);
         await ToSignal(tween, Tween.SignalName.Finished);
@@ -55,7 +58,7 @@ public partial class GameGlobal : Node
     public EnemyAliveState ToDict(SceneTree sceneTree)
     {
         var state = new EnemyAliveState();
-        var list = new List<string>();
+        var list = new Array<string>();
         foreach (var node in sceneTree.GetNodesInGroup("Enemy"))
         {
             var path = GetPathTo(node);
@@ -68,20 +71,61 @@ public partial class GameGlobal : Node
     
     public void FromDict(SceneTree sceneTree, EnemyAliveState aliveState)
     {
+        
         foreach (var node in sceneTree.GetNodesInGroup("Enemy"))
         {
             var path = GetPathTo(node);
             var array = aliveState.enemyAlive;
+            GD.Print(array.Count);
             if (!array.Contains(path))
             {
                 node.QueueFree();
             }
         }
+    }
 
+    
+    public void SaveGame()
+    {
+        var oldSceneName = GetTree().CurrentScene.SceneFilePath.GetBaseName();
+        WorldState[oldSceneName] = ToDict(GetTree());
+        PlayerStatus playerStatus = new PlayerStatus();
+        playerStatus.Energy = Stat.CurrentEnergy;
+        playerStatus.Health = Stat.CurrentHealth;
+        if (GetTree().GetFirstNodeInGroup("Player") is PlayerController player)
+        {
+            playerStatus.Position = player.GlobalPosition;
+        }
+        
+        SavedData savedData = new SavedData();
+        savedData.PlayerStatus = playerStatus;
+        savedData.WorldState = WorldState;
+        ResourceSaver.Save(savedData, UserDataFilePath);
+    }
+    
+    
+    public void LoadGame()
+    {
+        if (!ResourceLoader.Exists(UserDataFilePath))
+        {
+            return;
+        }
+
+        SavedData savedData= ResourceLoader.Load<SavedData>(UserDataFilePath);
+        WorldState = savedData.WorldState;
+        if (GetTree().GetFirstNodeInGroup("Player") is PlayerController player)
+        {
+            player.Position = savedData.PlayerStatus.Position;
+            Stat.CurrentHealth = savedData.PlayerStatus.Health;
+            Stat.CurrentEnergy = savedData.PlayerStatus.Energy;
+        }
+        var sceneName = GetTree().CurrentScene.SceneFilePath.GetBaseName();
+        if (WorldState.ContainsKey(sceneName))
+        {
+           
+            FromDict(GetTree(), WorldState[sceneName]);
+        }
     }
 }
 
-public partial class EnemyAliveState : GodotObject
-{
-    public List<string> enemyAlive { get; set; }
-}
+

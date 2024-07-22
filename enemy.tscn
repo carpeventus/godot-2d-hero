@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/HitBox.cs" id="2_pes3l"]
 [ext_resource type="Script" path="res://Scripts/HurtBox.cs" id="3_f2h8a"]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 4
 script = ExtResource("1_4twn4")
 
