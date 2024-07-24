@@ -119,15 +119,13 @@ public partial class GameGlobal : Node
         GetTree().ChangeSceneToFile(sceneName);
         WorldState = savedData.WorldState;
         await ToSignal(GetTree(), SceneTree.SignalName.TreeChanged);
-        if (GetTree().GetFirstNodeInGroup("Player") is PlayerController player)
+        if (GetTree().CurrentScene is World world)
         {
-            GD.Print("Load Player");
-            player.Position = savedData.PlayerStatus.Position;
-            Stat.CurrentHealth = savedData.PlayerStatus.Health;
-            Stat.CurrentEnergy = savedData.PlayerStatus.Energy;
-            Stat.SignalChanged();
+            world.UpdatePlayer(savedData.PlayerStatus.Position);
         }
-        
+        Stat.CurrentHealth = savedData.PlayerStatus.Health;
+        Stat.CurrentEnergy = savedData.PlayerStatus.Energy;
+        Stat.SignalChanged();
         if (WorldState.ContainsKey(sceneName))
         {
            
