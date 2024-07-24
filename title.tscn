@@ -1,18 +1,14 @@
-[gd_scene load_steps=13 format=4 uid="uid://dyvduvk6ff6ha"]
+[gd_scene load_steps=19 format=4 uid="uid://bk168hkl62f4v"]
 
-[ext_resource type="Script" path="res://Scripts/World.cs" id="1_vgywf"]
-[ext_resource type="Texture2D" uid="uid://hlbi3uml12pk" path="res://Sprites/Trees/Tree-Assets.png" id="2_7hh1s"]
-[ext_resource type="PackedScene" uid="uid://bos0k7qod7m1g" path="res://player.tscn" id="2_65h7m"]
-[ext_resource type="PackedScene" uid="uid://rmyct0e17yvy" path="res://ui/player_starus.tscn" id="2_rb5ry"]
-[ext_resource type="Texture2D" uid="uid://m1nbi5tm3xci" path="res://Sprites/Background/Background.png" id="4_dia6v"]
-[ext_resource type="PackedScene" uid="uid://bumy0hd14wura" path="res://boar.tscn" id="4_jx7mu"]
-[ext_resource type="PackedScene" uid="uid://duuf7ld23j5e6" path="res://entry_point.tscn" id="5_d5m2j"]
-[ext_resource type="Texture2D" uid="uid://ba3bii1bw3reg" path="res://Sprites/Trees/Background.png" id="5_sxkuf"]
-[ext_resource type="PackedScene" uid="uid://bf3jurrk3fkf" path="res://mine_gate.tscn" id="8_cr4by"]
-[ext_resource type="PackedScene" uid="uid://b63ag882efupk" path="res://save_point.tscn" id="10_eaijg"]
+[ext_resource type="Script" path="res://Title.cs" id="1_2tach"]
+[ext_resource type="Theme" uid="uid://b2xj7hsjfvc1n" path="res://ui/main_theme.tres" id="1_r4e7j"]
+[ext_resource type="Texture2D" uid="uid://hlbi3uml12pk" path="res://Sprites/Trees/Tree-Assets.png" id="3_3s02l"]
+[ext_resource type="Texture2D" uid="uid://m1nbi5tm3xci" path="res://Sprites/Background/Background.png" id="4_nusld"]
+[ext_resource type="Texture2D" uid="uid://ba3bii1bw3reg" path="res://Sprites/Trees/Background.png" id="5_clp1u"]
+[ext_resource type="Texture2D" uid="uid://cm8ck8agx8fnu" path="res://Sprites/char_blue_1.png" id="6_y3erp"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a3rfi"]
-texture = ExtResource("2_7hh1s")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kkx5h"]
+texture = ExtResource("3_3s02l")
 1:2/0 = 0
 1:2/0/terrain_set = 0
 1:2/0/terrain = 0
@@ -349,243 +345,359 @@ texture = ExtResource("2_7hh1s")
 10:7/0/terrains_peering_bit/top_left_corner = 1
 10:7/0/terrains_peering_bit/top_right_corner = 1
 
-[sub_resource type="TileSet" id="TileSet_ki5qo"]
+[sub_resource type="TileSet" id="TileSet_l8m6i"]
 physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 1
 terrain_set_0/terrain_0/name = "Truck"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 terrain_set_0/terrain_1/name = "Leaves"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
-sources/0 = SubResource("TileSetAtlasSource_a3rfi")
+sources/0 = SubResource("TileSetAtlasSource_kkx5h")
 
-[node name="World" type="Node2D"]
-script = ExtResource("1_vgywf")
-metadata/_edit_vertical_guides_ = [3569.0]
+[sub_resource type="AtlasTexture" id="AtlasTexture_uep01"]
+atlas = ExtResource("6_y3erp")
+region = Rect2(0, 0, 56, 56)
 
-[node name="HUD" type="CanvasLayer" parent="."]
-layer = 20
+[sub_resource type="AtlasTexture" id="AtlasTexture_firx5"]
+atlas = ExtResource("6_y3erp")
+region = Rect2(56, 0, 56, 56)
 
-[node name="PlayerStarusHBoxContainer" parent="HUD" instance=ExtResource("2_rb5ry")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7r3v1"]
+atlas = ExtResource("6_y3erp")
+region = Rect2(112, 0, 56, 56)
 
-[node name="TileMap" type="Node2D" parent="."]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmqlb"]
+atlas = ExtResource("6_y3erp")
+region = Rect2(168, 0, 56, 56)
 
-[node name="MineGateLeft" parent="TileMap" instance=ExtResource("8_cr4by")]
-position = Vector2(352, 240)
-rotation = -3.14159
-scale = Vector2(-1, -1)
-ScenePath = "res://world2.tscn"
-ToEntryName = "World2EntryPoint"
+[sub_resource type="AtlasTexture" id="AtlasTexture_fl4dj"]
+atlas = ExtResource("6_y3erp")
+region = Rect2(224, 0, 56, 56)
 
-[node name="WorldEntryPoint" parent="TileMap" instance=ExtResource("5_d5m2j")]
-position = Vector2(320, 240)
+[sub_resource type="AtlasTexture" id="AtlasTexture_catim"]
+atlas = ExtResource("6_y3erp")
+region = Rect2(280, 0, 56, 56)
 
-[node name="BackGround" type="TileMapLayer" parent="TileMap"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_a50w4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uep01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_firx5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7r3v1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmqlb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fl4dj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_catim")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_73i7q"]
+resource_name = "enter"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 0.353553),
+"update": 0,
+"values": [Vector2(389, 99), Vector2(275, 99)]
+}
+
+[sub_resource type="Animation" id="Animation_ljg0h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(275, 99)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_54hyx"]
+_data = {
+"RESET": SubResource("Animation_ljg0h"),
+"enter": SubResource("Animation_73i7q")
+}
+
+[node name="Title" type="CanvasLayer"]
+script = ExtResource("1_2tach")
+
+[node name="Graph" type="Node2D" parent="."]
+
+[node name="TileMap" type="Node2D" parent="Graph"]
+
+[node name="BackGround" type="TileMapLayer" parent="Graph/TileMap"]
 use_parent_material = true
-tile_set = SubResource("TileSet_ki5qo")
+tile_set = SubResource("TileSet_l8m6i")
 
-[node name="Platform" type="TileMapLayer" parent="TileMap"]
+[node name="Platform" type="TileMapLayer" parent="Graph/TileMap"]
 use_parent_material = true
 tile_map_data = PackedByteArray("AAD+/w0AAAAKAAAAAAD9/w0AAAAHAAIAAAD8/w0AAAAFAAIAAAD7/w0AAAABAAMAAAD7/wwAAAABAAIAAAD7/wsAAAABAAMAAAD7/woAAAAFAAAAAAAMAAMAAAACAAQAAAALAAUAAAAEAAQAAAALAAQAAAAKAAAAAAALAAMAAAAFAAAAAAAKAAUAAAACAAQAAAAKAAQAAAADAAIAAAAKAAMAAAADAAMAAAAJAAUAAAADAAQAAAAJAAQAAAACAAIAAAAJAAMAAAADAAMAAAAIAAUAAAAGAAAAAAAIAAQAAAACAAMAAAAIAAMAAAACAAMAAAAHAAUAAAABAAQAAAAHAAQAAAADAAMAAAAHAAMAAAACAAMAAAAGAAUAAAACAAQAAAAGAAQAAAACAAMAAAAGAAMAAAABAAIAAAAFAAUAAAACAAQAAAAFAAQAAAABAAMAAAAFAAMAAAADAAMAAAAEAAUAAAACAAQAAAAEAAQAAAADAAIAAAAEAAMAAAADAAIAAAADAAUAAAADAAQAAAADAAQAAAABAAIAAAADAAMAAAADAAIAAAACAAUAAAABAAQAAAACAAQAAAADAAIAAAACAAMAAAABAAMAAAABAAUAAAAGAAAAAAABAAQAAAADAAIAAAABAAMAAAACAAIAAAASAAMAAAAEAAIAAAASAAIAAAAKAAEAAAASAAEAAAAEAAAAAAARAAMAAAAHAAAAAAARAAIAAAABAAMAAAARAAEAAAAFAAIAAAARAAAAAAAKAAAAAAARAP//AAAEAAAAAAAQAAMAAAAGAAAAAAAQAAIAAAABAAIAAAAQAAEAAAABAAIAAAAQAAAAAAACAAMAAAAQAP//AAAGAAIAAAAPAAMAAAAGAAAAAAAPAAIAAAADAAIAAAAPAAEAAAABAAMAAAAPAAAAAAADAAMAAAAPAP//AAACAAAAAAAOAAMAAAACAAQAAAAOAAIAAAABAAIAAAAOAAEAAAACAAIAAAAOAAAAAAADAAIAAAAOAP//AAACAAAAAAANAAMAAAABAAQAAAANAAIAAAACAAIAAAANAAEAAAADAAMAAAANAAAAAAADAAIAAAANAP//AAABAAAAAAAMAAIAAAABAAIAAAAMAAEAAAABAAIAAAAMAAAAAAADAAMAAAAMAP//AAABAAAAAAALAAIAAAADAAMAAAALAAEAAAABAAMAAAALAAAAAAAHAAIAAAALAP//AAAAAAAAAAAEAAIAAAABAAIAAAAEAAEAAAACAAIAAAADAAIAAAACAAIAAAADAAEAAAACAAIAAAACAAIAAAACAAIAAAACAAEAAAACAAMAAAABAAIAAAABAAMAAAABAAEAAAABAAMAAAAAAAUAAAADAAQAAAAAAAQAAAADAAIAAAAAAAMAAAACAAMAAAAAAAIAAAABAAMAAAAAAAEAAAAHAAIAAAD//wUAAAACAAQAAAD//wQAAAACAAIAAAD//wMAAAACAAMAAAD//wIAAAADAAIAAAD//wEAAAADAAAAAAD+/wUAAAAFAAAAAAD+/wQAAAABAAIAAAD+/wMAAAACAAMAAAD+/wIAAAABAAMAAAD+/wEAAAABAAAAAAD9/wUAAAADAAMAAAD9/wQAAAACAAMAAAD9/wMAAAACAAMAAAD9/wIAAAACAAIAAAD9/wEAAAAGAAIAAAD8/wUAAAABAAMAAAD8/wQAAAABAAIAAAD8/wMAAAACAAIAAAD8/wIAAAACAAMAAAD8/wEAAAACAAAAAAD7/wUAAAABAAIAAAD7/wQAAAABAAIAAAD7/wMAAAAHAAIAAAD7/wIAAAAIAAAAAAD7/wEAAAAAAAAAAAAdAAwAAAAEAAQAAAAdAAsAAAAEAAIAAAAdAAoAAAAEAAIAAAAdAAkAAAAKAAAAAAAdAAgAAAAFAAEAAAAdAAcAAAAFAAEAAAAdAAYAAAAEAAAAAAAcAAwAAAAFAAAAAAAcAAsAAAABAAMAAAAcAAoAAAABAAMAAAAcAAkAAAACAAIAAAAcAAgAAAACAAMAAAAcAAcAAAADAAIAAAAcAAYAAAADAAAAAAAbAAwAAAADAAIAAAAbAAsAAAACAAIAAAAbAAoAAAADAAMAAAAbAAkAAAADAAMAAAAbAAgAAAACAAIAAAAbAAcAAAACAAIAAAAbAAYAAAADAAAAAAAaAAwAAAACAAMAAAAaAAsAAAABAAMAAAAaAAoAAAACAAIAAAAaAAkAAAABAAMAAAAaAAgAAAADAAMAAAAaAAcAAAADAAIAAAAaAAYAAAABAAAAAAAZAAwAAAACAAIAAAAZAAsAAAADAAMAAAAZAAoAAAADAAIAAAAZAAkAAAACAAIAAAAZAAgAAAABAAMAAAAZAAcAAAACAAMAAAAZAAYAAAADAAAAAAAYAAwAAAADAAIAAAAYAAsAAAACAAMAAAAYAAoAAAACAAMAAAAYAAkAAAACAAMAAAAYAAgAAAADAAIAAAAYAAcAAAACAAMAAAAYAAYAAAABAAAAAAD9/wgAAAADAAMAAAD9/wcAAAABAAMAAAD9/wYAAAADAAIAAAD8/wgAAAABAAMAAAD8/wcAAAADAAIAAAD8/wYAAAADAAMAAAD7/wgAAAACAAIAAAD7/wcAAAADAAIAAAD7/wYAAAADAAIAAAD6/wgAAAAHAAEAAAD6/wcAAAAIAAEAAAD6/wYAAAAHAAEAAAD6/woAAAAAAAMAAAD6/wsAAAAHAAEAAAD6/wwAAAAAAAIAAAD6/wkAAAAIAAEAAAD7/wkAAAABAAIAAAD8/wkAAAABAAIAAAD8/woAAAABAAMAAAD8/wsAAAACAAIAAAD9/wsAAAABAAIAAAD9/wwAAAAHAAAAAAD8/wwAAAAFAAAAAAD9/wkAAAABAAIAAAD9/woAAAADAAMAAAD+/wYAAAAEAAMAAAD+/wgAAAAEAAIAAAD+/wcAAAAEAAMAAAD+/wkAAAAEAAIAAAD+/woAAAAEAAMAAAD+/wsAAAAEAAIAAAD+/wwAAAAEAAMAAAD6/wUAAAAHAAEAAAD6/wQAAAAHAAEAAAD6/wMAAAAAAAAAAAD7/w4AAAADAAMAAAD8/w4AAAADAAMAAAD9/w4AAAABAAIAAAD+/w4AAAAEAAMAAAANAA8AAAACAAAAAAAMAA8AAAAGAAIAAAAOAA8AAAAGAAIAAAAPAA8AAAADAAAAAAAQAA8AAAACAAAAAAARAA8AAAABAAAAAAASAA8AAAABAAAAAAATAA8AAAAGAAIAAAAUAA8AAAABAAAAAAAVAA8AAAABAAAAAAAWAA8AAAAGAAIAAAD+/w8AAAAFAAIAAAD9/w8AAAABAAIAAAD8/w8AAAADAAMAAAD7/w8AAAABAAMAAAD8/xAAAAACAAIAAAD8/xEAAAACAAQAAAD9/xAAAAADAAIAAAD+/xAAAAADAAMAAAD//w8AAAADAAAAAAADABAAAAACAAIAAAAFABAAAAADAAIAAAAEABAAAAACAAIAAAAGABAAAAACAAIAAAAHABAAAAADAAMAAAAIABEAAAAGAAAAAAAJABEAAAADAAQAAAAKABEAAAAGAAAAAAALABEAAAACAAQAAAANABAAAAACAAMAAAAKABAAAAADAAMAAAALABAAAAADAAMAAAAJABAAAAADAAIAAAAIABAAAAADAAMAAAD//xAAAAADAAIAAAABABAAAAACAAMAAAAAABAAAAADAAIAAAADABEAAAAGAAAAAAACABAAAAACAAMAAAAEABEAAAAGAAAAAAAGABEAAAADAAQAAAAFABEAAAABAAQAAAAHABEAAAAGAAAAAAABABEAAAAGAAAAAAACABEAAAAGAAAAAAAAABEAAAAGAAAAAAD//xEAAAABAAQAAAD9/xEAAAACAAQAAAD+/xEAAAACAAQAAAANABEAAAACAAQAAAAOABEAAAABAAQAAAAPABEAAAADAAQAAAAQABEAAAADAAQAAAARABEAAAADAAQAAAATABEAAAABAAQAAAAUABAAAAADAAIAAAAVABAAAAABAAIAAAAWABAAAAACAAIAAAAXABAAAAADAAMAAAAYABAAAAAFAAAAAAAZABAAAAACAAQAAAAZAA8AAAADAAIAAAAZAA4AAAABAAIAAAAZAA0AAAABAAIAAAAYAA0AAAACAAIAAAAcAA0AAAAFAAAAAAAbAA0AAAABAAMAAAAaAA0AAAADAAIAAAAcAA4AAAAEAAIAAAAbAA4AAAABAAIAAAAaAA8AAAABAAMAAAAYAA8AAAADAAMAAAAXAA8AAAAHAAIAAAAYAA4AAAADAAMAAAAaAA4AAAABAAMAAAAbAA8AAAABAAIAAAAcAA8AAAAEAAMAAAAbABAAAAACAAQAAAAaABAAAAAGAAAAAAAcABAAAAAEAAQAAAAYABEAAAAEAAQAAAAWABEAAAACAAQAAAAXABEAAAAGAAAAAAAUABEAAAAGAAAAAAAVABEAAAAGAAAAAAAMABEAAAABAAQAAAAOABAAAAADAAIAAAAPABAAAAACAAIAAAAQABAAAAADAAMAAAATABAAAAABAAMAAAASABAAAAACAAMAAAARABAAAAACAAIAAAAAAA8AAAADAAAAAAABAA8AAAADAAAAAAACAA8AAAAGAAIAAAADAA8AAAAHAAIAAAAEAA8AAAADAAIAAAAFAA8AAAABAAIAAAAGAA8AAAAFAAIAAAAHAA8AAAADAAAAAAAIAA8AAAAGAAIAAAAJAA8AAAABAAAAAAAKAA8AAAAGAAIAAAALAA8AAAACAAAAAAAMABAAAAACAAMAAAADAA4AAAAAAAIAAAAFAA4AAAACAAMAAAAEAA4AAAABAAIAAAAGAA4AAAAEAAIAAAAGAA0AAAAEAAIAAAAGAAwAAAAEAAAAAAAFAAwAAAACAAAAAAAEAAwAAAACAAAAAAADAAwAAAAAAAAAAAADAA0AAAAAAAIAAAAEAA0AAAADAAIAAAAFAA0AAAADAAIAAAD6/w0AAAAIAAEAAAD6/w4AAAAHAAEAAAD6/w8AAAAIAAEAAAD6/xAAAAAAAAMAAAD7/xAAAAADAAMAAAD7/xEAAAABAAQAAAD6/xEAAAAAAAQAAAAXAA4AAAAAAAMAAAAXAA0AAAAAAAIAAAAXAAcAAAAAAAMAAAAXAAYAAAAAAAAAAAAXAAgAAAAAAAMAAAAXAAkAAAAIAAEAAAAXAAoAAAAHAAEAAAAXAAsAAAAAAAMAAAAXAAwAAAAAAAIAAAASAAsAAAAEAAQAAAARAAsAAAAGAAAAAAASAAoAAAAEAAIAAAARAAoAAAAHAAIAAAARAAkAAAAAAAMAAAASAAkAAAAEAAIAAAARAAgAAAAAAAIAAAASAAgAAAAEAAMAAAASAAcAAAAKAAEAAAARAAcAAAAHAAEAAAARAAUAAAAAAAIAAAARAAQAAAAAAAIAAAASAAQAAAAEAAMAAAASAAUAAAAKAAEAAAASAAYAAAAEAAIAAAAJAAsAAAAAAAQAAAAKAAsAAAACAAQAAAALAAsAAAAGAAAAAAAMAAsAAAAGAAAAAAANAAsAAAADAAQAAAAPAAsAAAADAAQAAAAQAAsAAAACAAQAAAAJAAoAAAAAAAAAAAAKAAoAAAACAAAAAAALAAoAAAADAAAAAAAMAAoAAAADAAAAAAANAAoAAAABAAAAAAAPAAoAAAABAAAAAAAQAAoAAAACAAAAAAAFAAIAAAADAAMAAAAGAAIAAAACAAMAAAAHAAIAAAADAAIAAAAIAAIAAAADAAIAAAAJAAIAAAABAAIAAAAKAAIAAAACAAIAAAAFAAEAAAACAAMAAAAHAAEAAAACAAMAAAAGAAEAAAACAAMAAAAIAAEAAAACAAMAAAAJAAEAAAABAAMAAAAKAAEAAAABAAIAAAAAAAAAAAAAAAAAAAABAAAAAAABAAAAAAACAAAAAAADAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAACAAAAAAAGAAAAAAADAAAAAAAHAAAAAAACAAAAAAAIAAAAAAAGAAIAAAAJAAAAAAACAAAAAAAKAAAAAAAGAAIAAAARAAYAAAAAAAMAAAAOAAoAAAACAAAAAAAOAAsAAAABAAQAAAA=")
-tile_set = SubResource("TileSet_ki5qo")
+tile_set = SubResource("TileSet_l8m6i")
 
-[node name="Front" type="TileMapLayer" parent="TileMap"]
+[node name="Front" type="TileMapLayer" parent="Graph/TileMap"]
 use_parent_material = true
 tile_map_data = PackedByteArray("AAAGAAIAAAAIAAMAAAAIAAIAAAAJAAMAAAADAAsAAAAJAAIAAAAYAAUAAAAIAAMAAAAZAAUAAAAGAAMAAAAdAAUAAAAGAAMAAAD//wAAAAAIAAIAAAAEAAAAAAAJAAIAAAADAAAAAAAGAAMAAAAOAA4AAAAJAAMAAAAVAA4AAAAJAAIAAAAUAA4AAAAHAAMAAAATAA4AAAAKAAIAAAASAA4AAAAGAAMAAAAQAA4AAAAJAAIAAAAJAA4AAAAJAAIAAAAHAA4AAAAJAAIAAAALAA4AAAAJAAIAAAANAA4AAAAKAAIAAAAPAA4AAAAHAAMAAAAbAAUAAAAJAAIAAAA=")
-tile_set = SubResource("TileSet_ki5qo")
+tile_set = SubResource("TileSet_l8m6i")
 
-[node name="Player" parent="." instance=ExtResource("2_65h7m")]
-z_index = 1
-position = Vector2(217, 236)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-limit_smoothed = true
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-editor_draw_drag_margin = true
-
-[node name="Boar" parent="." instance=ExtResource("4_jx7mu")]
-position = Vector2(239, 155)
-
-[node name="Boar2" parent="." instance=ExtResource("4_jx7mu")]
-position = Vector2(152, 240)
-
-[node name="Decorations" type="Node2D" parent="."]
+[node name="Decorations" type="Node2D" parent="Graph"]
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="Decorations"]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Graph/Decorations"]
 
-[node name="Sky" type="ParallaxLayer" parent="Decorations/ParallaxBackground"]
+[node name="Sky" type="ParallaxLayer" parent="Graph/Decorations/ParallaxBackground"]
 motion_scale = Vector2(0.2, 0.1)
 motion_mirroring = Vector2(480, 2.08165e-12)
 
-[node name="Background" type="Sprite2D" parent="Decorations/ParallaxBackground/Sky"]
-texture = ExtResource("4_dia6v")
+[node name="Background" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Sky"]
+texture = ExtResource("4_nusld")
 centered = false
 
-[node name="Hills" type="ParallaxLayer" parent="Decorations/ParallaxBackground"]
+[node name="Hills" type="ParallaxLayer" parent="Graph/Decorations/ParallaxBackground"]
 motion_scale = Vector2(0.4, 1)
 motion_mirroring = Vector2(384, 2.08165e-12)
 
-[node name="Background" type="Sprite2D" parent="Decorations/ParallaxBackground/Hills"]
-texture = ExtResource("5_sxkuf")
+[node name="Background" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Hills"]
+texture = ExtResource("5_clp1u")
 centered = false
 region_enabled = true
 region_rect = Rect2(800, 0, 96, 256)
 
-[node name="Background3" type="Sprite2D" parent="Decorations/ParallaxBackground/Hills"]
+[node name="Background3" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Hills"]
 position = Vector2(192, -1)
-texture = ExtResource("5_sxkuf")
+texture = ExtResource("5_clp1u")
 centered = false
 region_enabled = true
 region_rect = Rect2(800, 0, 96, 256)
 
-[node name="Background4" type="Sprite2D" parent="Decorations/ParallaxBackground/Hills"]
+[node name="Background4" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Hills"]
 position = Vector2(288, 2.08165e-12)
-texture = ExtResource("5_sxkuf")
+texture = ExtResource("5_clp1u")
 centered = false
 region_enabled = true
 region_rect = Rect2(800, 0, 96, 256)
 
-[node name="Background2" type="Sprite2D" parent="Decorations/ParallaxBackground/Hills"]
+[node name="Background2" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Hills"]
 position = Vector2(96, 0)
-texture = ExtResource("5_sxkuf")
+texture = ExtResource("5_clp1u")
 centered = false
 region_enabled = true
 region_rect = Rect2(800, 0, 96, 256)
 
-[node name="Trees" type="ParallaxLayer" parent="Decorations/ParallaxBackground"]
+[node name="Trees" type="ParallaxLayer" parent="Graph/Decorations/ParallaxBackground"]
 motion_scale = Vector2(0.6, 1)
 motion_mirroring = Vector2(384, 2.08165e-12)
 
-[node name="Background" type="Sprite2D" parent="Decorations/ParallaxBackground/Trees"]
+[node name="Background" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Trees"]
 position = Vector2(0, 64)
-texture = ExtResource("5_sxkuf")
+texture = ExtResource("5_clp1u")
 centered = false
 region_enabled = true
 region_rect = Rect2(112, 0, 96, 256)
 
-[node name="Background2" type="Sprite2D" parent="Decorations/ParallaxBackground/Trees"]
+[node name="Background2" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Trees"]
 position = Vector2(96, 64)
-texture = ExtResource("5_sxkuf")
+texture = ExtResource("5_clp1u")
 centered = false
 region_enabled = true
 region_rect = Rect2(112, 0, 96, 256)
 
-[node name="Background3" type="Sprite2D" parent="Decorations/ParallaxBackground/Trees"]
+[node name="Background3" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Trees"]
 position = Vector2(192, 64)
-texture = ExtResource("5_sxkuf")
+texture = ExtResource("5_clp1u")
 centered = false
 region_enabled = true
 region_rect = Rect2(112, 0, 96, 256)
 
-[node name="Background4" type="Sprite2D" parent="Decorations/ParallaxBackground/Trees"]
+[node name="Background4" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Trees"]
 position = Vector2(288, 64)
-texture = ExtResource("5_sxkuf")
+texture = ExtResource("5_clp1u")
 centered = false
 region_enabled = true
 region_rect = Rect2(112, 0, 96, 256)
 
-[node name="Bushed" type="ParallaxLayer" parent="Decorations/ParallaxBackground"]
+[node name="Bushed" type="ParallaxLayer" parent="Graph/Decorations/ParallaxBackground"]
 motion_scale = Vector2(0.9, 1)
 
-[node name="Tree-assets" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
+[node name="Tree-assets" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Bushed"]
 position = Vector2(22, 233)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets2" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
+[node name="Tree-assets2" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Bushed"]
 position = Vector2(174, 230)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets4" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
+[node name="Tree-assets4" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Bushed"]
 position = Vector2(267, 80)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets5" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
+[node name="Tree-assets5" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Bushed"]
 position = Vector2(407, 94)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets6" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
+[node name="Tree-assets6" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Bushed"]
 position = Vector2(288, 16)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets7" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
+[node name="Tree-assets7" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Bushed"]
 position = Vector2(97, 37)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets8" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
+[node name="Tree-assets8" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Bushed"]
 position = Vector2(97, 37)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets9" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
+[node name="Tree-assets9" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Bushed"]
 position = Vector2(395, 234)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets10" type="Sprite2D" parent="Decorations/ParallaxBackground/Bushed"]
+[node name="Tree-assets10" type="Sprite2D" parent="Graph/Decorations/ParallaxBackground/Bushed"]
 position = Vector2(395, 234)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="ParallaxForeground" type="ParallaxBackground" parent="Decorations"]
+[node name="ParallaxForeground" type="ParallaxBackground" parent="Graph/Decorations"]
 layer = 1
 
-[node name="Bushes" type="ParallaxLayer" parent="Decorations/ParallaxForeground"]
+[node name="Bushes" type="ParallaxLayer" parent="Graph/Decorations/ParallaxForeground"]
 motion_scale = Vector2(1.2, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Decorations/ParallaxForeground/Bushes"]
+[node name="Sprite2D" type="Sprite2D" parent="Graph/Decorations/ParallaxForeground/Bushes"]
 position = Vector2(-63, 238)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 centered = false
 region_enabled = true
 region_rect = Rect2(210, 293, 124, 86)
 
-[node name="Sprite2D2" type="Sprite2D" parent="Decorations/ParallaxForeground/Bushes"]
+[node name="Sprite2D2" type="Sprite2D" parent="Graph/Decorations/ParallaxForeground/Bushes"]
 position = Vector2(52, 234)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 centered = false
 region_enabled = true
 region_rect = Rect2(210, 293, 124, 86)
 
-[node name="Sprite2D3" type="Sprite2D" parent="Decorations/ParallaxForeground/Bushes"]
+[node name="Sprite2D3" type="Sprite2D" parent="Graph/Decorations/ParallaxForeground/Bushes"]
 position = Vector2(168, 235)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 centered = false
 region_enabled = true
 region_rect = Rect2(210, 293, 124, 86)
 
-[node name="Sprite2D4" type="Sprite2D" parent="Decorations/ParallaxForeground/Bushes"]
+[node name="Sprite2D4" type="Sprite2D" parent="Graph/Decorations/ParallaxForeground/Bushes"]
 position = Vector2(281, 233)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 centered = false
 region_enabled = true
 region_rect = Rect2(210, 293, 124, 86)
 
-[node name="Sprite2D5" type="Sprite2D" parent="Decorations/ParallaxForeground/Bushes"]
+[node name="Sprite2D5" type="Sprite2D" parent="Graph/Decorations/ParallaxForeground/Bushes"]
 position = Vector2(281, 233)
-texture = ExtResource("2_7hh1s")
+texture = ExtResource("3_3s02l")
 centered = false
 region_enabled = true
 region_rect = Rect2(210, 293, 124, 86)
 
-[node name="SavePoint" parent="." instance=ExtResource("10_eaijg")]
-position = Vector2(80, 168)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Graph"]
+position = Vector2(80, 159)
+sprite_frames = SubResource("SpriteFrames_a50w4")
+autoplay = "default"
+frame_progress = 0.835426
 
-[editable path="Player"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 24
+
+[node name="Title" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_r4e7j")
+theme_override_colors/font_color = Color(0.818938, 0.437236, 0.148432, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "Hero Story"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -109.0
+offset_top = -117.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NewGame" type="Button" parent="MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New Game"
+
+[node name="Continue" type="Button" parent="MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Continue"
+
+[node name="Exit" type="Button" parent="MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Exit Game"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_54hyx")
+}
+autoplay = "enter"

@@ -27,13 +27,18 @@ public partial class Stat : Node
 		ResetHealthAndEnergy();
 	}
 
+	public void SignalChanged()
+	{
+		EmitSignal(SignalName.HealthChanged);
+		EmitSignal(SignalName.EnergyChanged);
+	}
+
 	public void ResetHealthAndEnergy()
 	{
 		
 		CurrentHealth = MaxHealth;
 		CurrentEnergy = MaxEnergy;
-		EmitSignal(SignalName.HealthChanged);
-		EmitSignal(SignalName.EnergyChanged);
+		SignalChanged();
 	}
 
 	public override void _Process(double delta) {

@@ -18,13 +18,15 @@ public partial class GameGlobal : Node
         Stat = GetNode<Stat>("Stat");
         ColorRect = GetNode<ColorRect>("SceneFade/ColorRect");
         ColorRect.Color = new Color(ColorRect.Color,0.0f);
-        LoadGame();
+    }
+
+    public void NewGame()
+    {
+        GetTree().ChangeSceneToFile("res://world.tscn");
     }
 
     public async void ChangeScene(string path, string entryPointName)
     {
-        // Save
-        SaveGame();
         var tween = GetTree().CreateTween();
         tween.TweenProperty(ColorRect, "color:a", 1, 0.2);
         await ToSignal(tween, Tween.SignalName.Finished);
@@ -92,6 +94,7 @@ public partial class GameGlobal : Node
         PlayerStatus playerStatus = new PlayerStatus();
         playerStatus.Energy = Stat.CurrentEnergy;
         playerStatus.Health = Stat.CurrentHealth;
+        playerStatus.SceneName = GetTree().CurrentScene.SceneFilePath;
         if (GetTree().GetFirstNodeInGroup("Player") is PlayerController player)
         {
             playerStatus.Position = player.GlobalPosition;
@@ -104,7 +107,7 @@ public partial class GameGlobal : Node
     }
     
     
-    public void LoadGame()
+    public async void LoadGame()
     {
         if (!ResourceLoader.Exists(UserDataFilePath))
         {
@@ -112,19 +115,29 @@ public partial class GameGlobal : Node
         }
 
         SavedData savedData= ResourceLoader.Load<SavedData>(UserDataFilePath);
+        var sceneName = savedData.PlayerStatus.SceneName;
+        GetTree().ChangeSceneToFile(sceneName);
         WorldState = savedData.WorldState;
+        await ToSignal(GetTree(), SceneTree.SignalName.TreeChanged);
         if (GetTree().GetFirstNodeInGroup("Player") is PlayerController player)
         {
+            GD.Print("Load Player");
             player.Position = savedData.PlayerStatus.Position;
             Stat.CurrentHealth = savedData.PlayerStatus.Health;
             Stat.CurrentEnergy = savedData.PlayerStatus.Energy;
+            Stat.SignalChanged();
         }
-        var sceneName = GetTree().CurrentScene.SceneFilePath.GetBaseName();
+        
         if (WorldState.ContainsKey(sceneName))
         {
            
             FromDict(GetTree(), WorldState[sceneName]);
         }
+    }
+
+    public bool HasSaveFile()
+    {
+        return ResourceLoader.Exists(UserDataFilePath);
     }
 }
 
