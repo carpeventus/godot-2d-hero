@@ -3,15 +3,18 @@ using System;
 
 public partial class Title : CanvasLayer
 {
+	[Export] private AudioStream Bgm;
 	private Button _newGameButton;
 	private Button _continueButton;
 	private Button _exitButton;
 	private VBoxContainer _boxContainer;
 	public GameGlobal GameGlobal;
+	public SoundManager SoundManager;
 	public override void _Ready()
 	{
 
 		GameGlobal = GetNode<GameGlobal>("/root/GameGlobal");
+		SoundManager = GetNode<SoundManager>("/root/SoundManager");
 		_newGameButton = GetNode<Button>("%NewGame");
 		_continueButton = GetNode<Button>("%Continue");
 		_exitButton = GetNode<Button>("%Exit");
@@ -28,6 +31,8 @@ public partial class Title : CanvasLayer
 				b.MouseEntered += () => b.GrabFocus();
 			}
 		}
+		SoundManager.SetUpUiSound(this);
+		SoundManager.PlayerBgm(Bgm);
 	}
 
 

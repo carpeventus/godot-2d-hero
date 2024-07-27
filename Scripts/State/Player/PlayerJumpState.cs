@@ -8,6 +8,7 @@ public class PlayerJumpState : PlayerAbility {
     public override void OnEnter() {
         // 动画实际上不会播放，立刻就转到因为会使跳跃操作手感稀碎
         base.OnEnter();
+        player.SoundManager.PlayerSfx("Jump");
         player.Velocity = new Vector2(player.Velocity.X, 0f);
         player.Velocity = new Vector2(player.Velocity.X, player.JumpVelocity);
         player.MoveAndSlide();

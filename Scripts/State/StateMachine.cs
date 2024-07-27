@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Godot;
 
 public class StateMachine<T> where T : IStateMachineState {
     public T CurrentState { get; private set; }

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b2svdfca2w5f4"
+path="res://.godot/imported/近藤浩治 - カカリコ村.mp3-37d0ccc64f4358c598c80ceb31c85951.mp3str"
+
+[deps]
+
+source_file="res://music/近藤浩治 - カカリコ村.mp3"
+dest_files=["res://.godot/imported/近藤浩治 - カカリコ村.mp3-37d0ccc64f4358c598c80ceb31c85951.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

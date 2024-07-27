@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=4 uid="uid://dyvduvk6ff6ha"]
+[gd_scene load_steps=14 format=4 uid="uid://dyvduvk6ff6ha"]
 
 [ext_resource type="Script" path="res://Scripts/World.cs" id="1_vgywf"]
 [ext_resource type="Texture2D" uid="uid://hlbi3uml12pk" path="res://Sprites/Trees/Tree-Assets.png" id="2_7hh1s"]
 [ext_resource type="PackedScene" uid="uid://bos0k7qod7m1g" path="res://player.tscn" id="2_65h7m"]
+[ext_resource type="AudioStream" uid="uid://cl4os0n53pgff" path="res://music/近藤浩治 - 迷いの森.mp3" id="2_o615m"]
 [ext_resource type="PackedScene" uid="uid://rmyct0e17yvy" path="res://ui/player_starus.tscn" id="2_rb5ry"]
 [ext_resource type="Texture2D" uid="uid://m1nbi5tm3xci" path="res://Sprites/Background/Background.png" id="4_dia6v"]
 [ext_resource type="PackedScene" uid="uid://bumy0hd14wura" path="res://boar.tscn" id="4_jx7mu"]
@@ -360,6 +361,7 @@ sources/0 = SubResource("TileSetAtlasSource_a3rfi")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_vgywf")
+Bgm = ExtResource("2_o615m")
 metadata/_edit_vertical_guides_ = [3569.0]
 
 [node name="HUD" type="CanvasLayer" parent="."]

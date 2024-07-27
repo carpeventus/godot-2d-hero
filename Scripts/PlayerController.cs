@@ -39,6 +39,8 @@ public partial class PlayerController : CharacterBody2D {
 	public float InputDirection { get; set; }
 	public float CurrentGravity { get; set; }
 	public bool IsAttackComboRequested { get; set; }
+	[Export] public PackedScene GameOverScene;
+
 
 	[Export] public float MoveSpeed { get; private set; } = 100f;
 
@@ -55,6 +57,7 @@ public partial class PlayerController : CharacterBody2D {
 	
 	private Node2D _spriteWrap;
 	public GameGlobal GameGlobal { get; private set; }
+	public SoundManager SoundManager { get; private set; }
 
 	public Dictionary<string, Interactable> InteractableWithDict { get; set; } = new();
 
@@ -94,6 +97,7 @@ public partial class PlayerController : CharacterBody2D {
 		HurtBox = GetNode<HurtBox>("SpriteWrap/HurtBox");
 		
 		GameGlobal = GetNode<GameGlobal>("/root/GameGlobal");
+		SoundManager = GetNode<SoundManager>("/root/SoundManager");
 		InteractFlag = GetNode<AnimatedSprite2D>("InteractFlag");
 		HurtBox.Hurt += OnHurt;
 		InitStateMachine();
@@ -169,12 +173,6 @@ public partial class PlayerController : CharacterBody2D {
 	public bool IsPlayerImmuneNow()
 	{
 		return !ImmuneTimer.IsStopped();
-	}
-
-	public void Die()
-	{
-		GetTree().ReloadCurrentScene();
-		GameGlobal.Stat.ResetHealthAndEnergy();
 	}
 	
 	public bool IsDead()

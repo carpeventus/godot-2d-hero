@@ -8,9 +8,10 @@ public class PlayerDieState : PlayerState
     
     public override void OnEnter()
     {
-        GD.Print("You are dead");
         base.OnEnter();
         player.Velocity = Vector2.Zero;
         player.MoveAndSlide();
+        var gameOverScreen = player.GameOverScene.Instantiate<GameOverScreen>();
+        player.Owner.AddChild(gameOverScreen);
     }
 }

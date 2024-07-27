@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cs6gyoqn5q7g3"]
+
+[ext_resource type="AudioStream" uid="uid://d28lallpksxkk" path="res://SFX/attack.wav" id="1_byuhr"]
+[ext_resource type="Script" path="res://autoload/SoundManager.cs" id="1_vmfil"]
+[ext_resource type="AudioStream" uid="uid://hlo8yoqb38cg" path="res://SFX/jump.wav" id="2_epskw"]
+[ext_resource type="AudioStream" uid="uid://dihega2w7xem7" path="res://SFX/ui_select.wav" id="3_yojev"]
+
+[node name="SoundManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_vmfil")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("1_byuhr")
+bus = &"Sfx"
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("2_epskw")
+bus = &"Sfx"
+
+[node name="UiSelect" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("3_yojev")
+bus = &"Sfx"
+
+[node name="BgmPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = &"Music"

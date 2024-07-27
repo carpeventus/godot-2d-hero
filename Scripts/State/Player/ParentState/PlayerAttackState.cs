@@ -7,6 +7,7 @@ public class PlayerAttackState : PlayerState {
     public override void OnEnter() {
         base.OnEnter();
         player.IsAttackComboRequested = false;
+        player.SoundManager.PlayerSfx("Attack");
     }
 
     public override void OnExit() {
