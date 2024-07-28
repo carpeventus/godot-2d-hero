@@ -5,6 +5,9 @@ using Godot.Collections;
 public partial class GameGlobal : Node
 {
     public readonly string UserDataFilePath = "user://game.tres";
+    public readonly string UserConfigFilePath = "user://audio.cfg";
+
+    public const string ConfigParam = "audio";
 
     public Camera2D Camera2D { get; set; }
     public Stat Stat { get; set; }
@@ -18,6 +21,7 @@ public partial class GameGlobal : Node
         Stat = GetNode<Stat>("Stat");
         ColorRect = GetNode<ColorRect>("SceneFade/ColorRect");
         ColorRect.Color = new Color(ColorRect.Color,0.0f);
+        LoadConfig();
     }
 
     public void NewGame()
@@ -136,6 +140,24 @@ public partial class GameGlobal : Node
     public bool HasSaveFile()
     {
         return ResourceLoader.Exists(UserDataFilePath);
+    }
+
+    public void SaveConfig()
+    {
+        var configFile = new ConfigFile();
+        configFile.SetValue(ConfigParam, SoundManager.SFX_BUS_NAME, SoundManager.GetVolume(SoundManager.SFX_BUS_NAME));
+        configFile.SetValue(ConfigParam, SoundManager.MUSIC_BUS_NAME, SoundManager.GetVolume(SoundManager.MUSIC_BUS_NAME));
+        configFile.SetValue(ConfigParam, SoundManager.MASTER_BUS_NAME, SoundManager.GetVolume(SoundManager.MASTER_BUS_NAME));
+        configFile.Save(UserConfigFilePath);
+    }
+
+    public void LoadConfig()
+    {
+        var configFile = new ConfigFile();
+        configFile.Load(UserConfigFilePath);
+        SoundManager.SetVolume((float) configFile.GetValue(ConfigParam, SoundManager.MASTER_BUS_NAME, 1f), SoundManager.MASTER_BUS_NAME);
+        SoundManager.SetVolume((float) configFile.GetValue(ConfigParam, SoundManager.MUSIC_BUS_NAME, 0.5f), SoundManager.MUSIC_BUS_NAME);
+        SoundManager.SetVolume((float) configFile.GetValue(ConfigParam, SoundManager.SFX_BUS_NAME, 0.8f), SoundManager.SFX_BUS_NAME);
     }
 }
 

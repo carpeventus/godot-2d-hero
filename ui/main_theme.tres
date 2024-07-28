@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b2xj7hsjfvc1n"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://b2xj7hsjfvc1n"]
 
 [ext_resource type="Texture2D" uid="uid://be13nla15jj27" path="res://Sprites/hud.png" id="1_angfg"]
 
@@ -30,6 +30,41 @@ content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecttp"]
+atlas = ExtResource("1_angfg")
+region = Rect2(189, 253, 22, 22)
+margin = Rect2(2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7nss"]
+atlas = ExtResource("1_angfg")
+region = Rect2(189, 157, 22, 22)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fetok"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dvaeu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_38d5w"]
+texture = ExtResource("1_angfg")
+texture_margin_left = 2.0
+texture_margin_top = 5.0
+texture_margin_right = 2.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(3, 130, 11, 11)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kev71"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+texture = ExtResource("1_angfg")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 2
+region_rect = Rect2(64, 272, 16, 16)
+
 [resource]
 Button/colors/font_outline_color = Color(0, 0, 0, 0.811765)
 Button/colors/icon_hover_color = Color(1, 1, 1, 0.517647)
@@ -39,3 +74,10 @@ Button/styles/focus = SubResource("StyleBoxTexture_26iqw")
 Button/styles/hover = SubResource("StyleBoxEmpty_u5k8o")
 Button/styles/normal = SubResource("StyleBoxEmpty_gbm0i")
 Button/styles/pressed = SubResource("StyleBoxEmpty_7viyu")
+HSlider/icons/grabber = SubResource("AtlasTexture_ecttp")
+HSlider/icons/grabber_highlight = SubResource("AtlasTexture_t7nss")
+HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_fetok")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dvaeu")
+HSlider/styles/slider = SubResource("StyleBoxTexture_38d5w")
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.388235)
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_kev71")

@@ -7,7 +7,8 @@ public partial class World : Node2D {
 	private TileMapLayer _tileMap;
 	private PlayerController _player;
 	
-	[Export] private AudioStream Bgm;
+	[Export] public AudioStream Bgm;
+	[Export] public PackedScene PauseMenuScene { get; private set; } 
 	public GameGlobal GameGlobal { get; private set; }
 	public SoundManager SoundManager { get; private set; }
 
@@ -32,8 +33,18 @@ public partial class World : Node2D {
 		GameGlobal = GetNode<GameGlobal>("/root/GameGlobal");
 		SoundManager = GetNode<SoundManager>("/root/SoundManager");
 		GameGlobal.Camera2D = _camera;
-		GameGlobal.Stat.ResetHealthAndEnergy();
 		SoundManager.PlayerBgm(Bgm);
-		
 	}
+
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if (@event.IsActionPressed("pause"))
+		{
+			var pauseMenu = PauseMenuScene.Instantiate<PauseMenu>();
+			AddChild(pauseMenu);
+			GetTree().Root.SetInputAsHandled();
+		}
+
+	}
+	
 }

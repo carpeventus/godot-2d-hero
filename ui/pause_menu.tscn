@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch0rwsvmyads3"]
+
+[ext_resource type="Script" path="res://ui/PauseMenu.cs" id="1_d7tyg"]
+[ext_resource type="PackedScene" uid="uid://bdllmvsxi2w4e" path="res://ui/vlolume_slider.tscn" id="1_tf2bx"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_d7tyg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.00392157, 0.00392157, 0.00392157, 0.25098)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -33.0
+offset_right = 58.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioSetting" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/AudioSetting"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+columns = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/AudioSetting/GridContainer"]
+layout_mode = 2
+text = "Master"
+
+[node name="VolumeSlider" parent="VBoxContainer/AudioSetting/GridContainer" instance=ExtResource("1_tf2bx")]
+custom_minimum_size = Vector2(128, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+BusName = "Master"
+
+[node name="Label2" type="Label" parent="VBoxContainer/AudioSetting/GridContainer"]
+layout_mode = 2
+text = "Music"
+
+[node name="VolumeSlider2" parent="VBoxContainer/AudioSetting/GridContainer" instance=ExtResource("1_tf2bx")]
+custom_minimum_size = Vector2(128, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Label3" type="Label" parent="VBoxContainer/AudioSetting/GridContainer"]
+layout_mode = 2
+text = "SFX"
+
+[node name="VolumeSlider3" parent="VBoxContainer/AudioSetting/GridContainer" instance=ExtResource("1_tf2bx")]
+custom_minimum_size = Vector2(128, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+BusName = "Sfx"
+
+[node name="ActionSetting" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ActionSetting"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="QuitButton" type="Button" parent="VBoxContainer/ActionSetting/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"
+
+[node name="ResumeButton" type="Button" parent="VBoxContainer/ActionSetting/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"

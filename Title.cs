@@ -10,11 +10,12 @@ public partial class Title : CanvasLayer
 	private VBoxContainer _boxContainer;
 	public GameGlobal GameGlobal;
 	public SoundManager SoundManager;
+	private AnimationPlayer _animationPlayer;
 	public override void _Ready()
 	{
-
 		GameGlobal = GetNode<GameGlobal>("/root/GameGlobal");
 		SoundManager = GetNode<SoundManager>("/root/SoundManager");
+		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_newGameButton = GetNode<Button>("%NewGame");
 		_continueButton = GetNode<Button>("%Continue");
 		_exitButton = GetNode<Button>("%Exit");
@@ -24,18 +25,10 @@ public partial class Title : CanvasLayer
 		_continueButton.Pressed += OnContinueButtonPressed; 
 		_exitButton.Pressed += OnExitButtonPressed;
 		_continueButton.Disabled = !GameGlobal.HasSaveFile();
-		foreach (var button in _boxContainer.GetChildren())
-		{
-			if (button is Button b)
-			{
-				b.MouseEntered += () => b.GrabFocus();
-			}
-		}
 		SoundManager.SetUpUiSound(this);
 		SoundManager.PlayerBgm(Bgm);
 	}
-
-
+	
 	public void OnNewGameButtonPressed()
 	{
 		GameGlobal.NewGame();
@@ -46,7 +39,6 @@ public partial class Title : CanvasLayer
 	}
 	public void OnContinueButtonPressed()
 	{
-		GD.Print("Loading Game");
 		GameGlobal.LoadGame();
 	}
 }

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdllmvsxi2w4e"]
+
+[ext_resource type="Script" path="res://ui/VlolumeSlider.cs" id="1_cf8jw"]
+[ext_resource type="AudioStream" uid="uid://hhpiqr0fvrtn" path="res://music/近藤浩治 - タイトル.mp3" id="2_2s8o7"]
+
+[node name="VolumeSlider" type="HSlider"]
+offset_right = 192.0
+offset_bottom = 16.0
+max_value = 1.0
+step = 0.1
+value = 0.5
+script = ExtResource("1_cf8jw")
+BusName = "Music"
+AudioStream = ExtResource("2_2s8o7")
