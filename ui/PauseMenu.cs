@@ -14,6 +14,7 @@ public partial class PauseMenu : CanvasLayer
 		SoundManager.SetUpUiSound(this);
 		_quitButton.Pressed += Quit;
 		_resumeButton.Pressed += ResumeGame;
+		_resumeButton.GrabFocus();
 		GetTree().Paused = true;
 	}
 

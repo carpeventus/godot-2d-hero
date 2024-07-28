@@ -7,8 +7,11 @@ public partial class HitBox : Area2D
     
     [Signal]
     public delegate void HitEventHandler(HurtBox hurtBox);
-    
-    public override void _Ready() {
+
+    private GameGlobal _gameGlobal; 
+    public override void _Ready()
+    {
+        _gameGlobal = GetNode<GameGlobal>("/root/GameGlobal");
         base._Ready();
         AreaEntered += OnAreaEntered;
     }
@@ -17,5 +20,6 @@ public partial class HitBox : Area2D
         HurtBox hurtBox = area as HurtBox;
         EmitSignal(SignalName.Hit, hurtBox);
         hurtBox?.EmitSignal(HurtBox.SignalName.Hurt, this);
+        _gameGlobal.ShakeCamera(8, 0.8f);
     }
 }

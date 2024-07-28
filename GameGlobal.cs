@@ -16,6 +16,13 @@ public partial class GameGlobal : Node
         new Godot.Collections.Dictionary<string, EnemyAliveState>();
 
     public ColorRect ColorRect { get; set; }
+
+    public void ShakeCamera(double strength, float recoveryTime)
+    {
+        Camera2D.Offset = new Vector2((float)GD.RandRange(-strength, strength), (float)GD.RandRange(-strength, strength));
+        var tween = CreateTween();
+        tween.TweenProperty(Camera2D, "offset", new Vector2(0, 0), recoveryTime);
+    }
     
     public override void _Ready() {
         Stat = GetNode<Stat>("Stat");

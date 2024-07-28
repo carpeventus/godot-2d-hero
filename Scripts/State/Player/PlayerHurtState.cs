@@ -10,6 +10,7 @@ public class PlayerHurtState : PlayerState
     public override void OnEnter()
     {
         base.OnEnter();
+        player.GameGlobal.ShakeCamera(5, 0.5f);
         var attackDirection = Mathf.Sign(player.GlobalPosition.X - player.CurrentTakenDamage.source.GlobalPosition.X) == 1 ? 1 : -1;
         var velocity = Vector2.Zero;
         velocity.X = player.KnockBackForce * attackDirection;
